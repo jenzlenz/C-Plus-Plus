@@ -1,0 +1,128 @@
+/**********************************************
+Program Name: quiz1.cpp
+Author: J Dooley
+Date: July 10, 2017
+Synopsis:  Write a program that utilizes functions to calculate the surface area, perimeter and volume of various 
+geometric objects.
+**********************************************/
+
+#include <iostream>
+using namespace std;
+
+float calcSurfaceCylinder(double diameter, double height);
+float calcSurfaceCylinder(double radius, float height);
+float calcPerimeterCylinder(float diameter, float height);
+float calcPerimeterCylinder(double diameter, float height);
+float calcVolumeCylinder(float radius, float height);
+float calcSurfaceParalleliped(float height, float length, float depth);
+float calcVolumeParalleliped(float height, float length, float depth); 
+
+int main ()
+{
+
+double Diameter = 10.0;
+float diameter = 10.0;
+double height = 1.0;
+double radius = 5.0;
+double depth = 1.0;;
+double length = 5.0;
+
+float surfaceCylinder = 0.0;
+float perimeterCylinder = 0.0;
+float volumeCylinder = 0.0;
+float surfaceParalleliped = 0.0;
+float volumeParalleliped = 0.0;
+
+surfaceCylinder = calcSurfaceCylinder(radius, height);
+cout << "Surface Area of the cylinder is " << surfaceCylinder << "\n";
+
+perimeterCylinder = calcPerimeterCylinder(diameter, height);
+cout << "Perimeter of the cylinder is " << perimeterCylinder << "\n";
+
+volumeCylinder = calcVolumeCylinder(radius, height);
+cout << "Volume of the cylinder is " << volumeCylinder << "\n";
+
+surfaceParalleliped = calcSurfaceParalleliped(height, length, depth);
+cout << "Surface of the paralleliped is " << surfaceParalleliped << "\n";
+
+volumeParalleliped = calcVolumeParalleliped(height, length, depth);
+cout << "Volume of the paralleliped is " << volumeParalleliped << "\n";
+
+return 0;
+}
+
+float calcSurfaceCylinder(double Diameter, double height)
+{
+	/*cout << "surface cylinder with inputs diameter height.\n";*/
+	float sc = 0.0;
+	double radius = 0.0;
+	radius = Diameter / 2;
+        sc = (2 * 3.14159 * radius * height) + (2 * 3.14159 * (radius * radius));
+        /*cout << "Surface Area of the cylinder is " << sc << "\n";*/
+
+return sc;
+}
+
+float calcSurfaceCylinder(double radius, float height)
+{
+	/*cout << "surface cylinder with inputs radius and height.\n";*/
+	float sc = 0.0;
+	sc = (2 * 3.14159 * radius * height) + (2 * 3.14159 * (radius * radius));
+	/*cout << "Surface Area of the cylinder is " << sc << "\n";*/
+
+return sc;
+}
+
+float calcPerimeterCylinder(float diameter, float height = 1.0)
+{
+	/*cout << "perimeter Cylinder with inputs FLOAT diameter and height.\n";*/
+	float pc = 0.0;
+	double radius = 0.0;
+	radius = diameter / 2;
+	pc = (2 * (2 * 3.14159 * radius) * height);
+	/*cout << "Perimeter of the cylinder is " << pc << "\n";*/
+
+return pc;
+}
+
+float calcPerimeterCylinder(double Diameter, float height)
+{
+	/*cout << "perimeter Cylinder with inputs DOUBLE diameter and height.\n";*/
+	float pc = 0.0;
+        double radius = 0.0;
+        radius = Diameter / 2;
+        pc = (2 * (2 * 3.14159 * radius) * height);
+	/*cout << "Perimeter of the cylinder is " << pc << "\n";*/
+
+return pc;
+}
+
+float calcVolumeCylinder(float radius, float height)
+{
+	/*cout << "volume cylinder \n";*/
+	float vc =  0.0;
+	vc = (3.14159 * (radius * radius) * height);
+	/*cout << "Volume of the cylinder is " << vc << "\n";*/
+
+return vc;
+}
+
+float calcSurfaceParalleliped(float height, float length, float depth = 1.0)
+{
+	/*cout << "surface paralleliped \n";*/
+	float sp = 0.0;
+	sp = (2 * length * depth) + (2 * length * height) + (2 * depth * height);
+	/*cout << "Surface of the parallelpied is " << sp << "\n";*/
+
+return sp;
+}
+
+float calcVolumeParalleliped(float height, float length, float depth = 1.0)
+{
+	/*cout << "volume paralleliped \n";*/
+	float vp = 0.0;
+	vp = height * length * depth;
+	/*cout << "Volume of the paralleliped is " << vp << "\n";*/
+
+return vp;
+}
