@@ -1,0 +1,191 @@
+Last login: Mon Jul 24 17:22:23 on console
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+matrixptr.cpp:5:10: fatal error: 'iostrem' file not found
+#include <iostrem>
+         ^
+1 error generated.
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+matrixptr.cpp:44:1: error: expected expression
+:
+^
+matrixptr.cpp:55:1: error: expected expression
+:
+^
+2 errors generated.
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+WW311WK01:~ nyusps$ ./matrixptr
+Inside the matrx gen function
+Inside the matrx gen function
+B	J	P	L	P	P	Q	Q	L	P	Q	S	G	B	D	C	T	S	Q	A	A	N	N	O	F	S
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+WW311WK01:~ nyusps$ ./matrixptr
+Inside the matrx gen function
+Inside the matrx gen function
+B	J	P	L	P	P	Q	Q	L	P	Q	S	G	B	D	C	T	S	Q	A	A	N	N	O	F	S
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+WW311WK01:~ nyusps$ ./matrixptr
+Inside the matrx gen function
+Inside the matrx gen function
+V	T	F	L	Z	F	G	[	
+L	Z	Q	S	[	B	D	C	
+T	I	Q	K	U	D	N	Y	
+F	Q	^	]	N	G	O	Z	
+U	P	J	E	]	Q	Q	C	
+\	V	[	]	D	H	C	]	
+Q	T	F	N	D	Z	F	K	
+N	M	A	C	L	G	V	K	
+U	O	H	K	V	Y	K	T	
+O	L	I	R	Z	V	W	I	
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+matrixptr.cpp:38:2: error: use of undeclared identifier 'print_Matrix2'; did you mean 'print_Matrix'?
+        print_Matrix2(Matrix_ptr_ptr, R, C);
+        ^~~~~~~~~~~~~
+        print_Matrix
+matrixptr.cpp:14:6: note: 'print_Matrix' declared here
+void print_Matrix(char* Matrix_ptr[], int row, int col);
+     ^
+matrixptr.cpp:65:2: error: use of undeclared identifier 'cut'; did you mean 'cout'?
+        cut < "Inside print 2 matrix function";
+        ^~~
+        cout
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/../include/c++/v1/iostream:54:33: note: 'cout' declared here
+extern _LIBCPP_FUNC_VIS ostream cout;
+                                ^
+matrixptr.cpp:65:6: warning: result of comparison against a string literal is unspecified (use strncmp instead) [-Wstring-compare]
+        cut < "Inside print 2 matrix function";
+            ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+matrixptr.cpp:65:6: error: invalid operands to binary expression ('ostream' (aka 'basic_ostream<char>') and 'const char *')
+        cut < "Inside print 2 matrix function";
+        ~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 warning and 3 errors generated.
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+matrixptr.cpp:38:2: error: use of undeclared identifier 'print_Matrix2'; did you mean 'print_Matrix'?
+        print_Matrix2(Matrix_ptr_ptr, R, C);
+        ^~~~~~~~~~~~~
+        print_Matrix
+matrixptr.cpp:14:6: note: 'print_Matrix' declared here
+void print_Matrix(char* Matrix_ptr[], int row, int col);
+     ^
+matrixptr.cpp:65:7: warning: result of comparison against a string literal is unspecified (use strncmp instead) [-Wstring-compare]
+        cout < "Inside print 2 matrix function";
+             ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+matrixptr.cpp:65:7: error: invalid operands to binary expression ('ostream' (aka 'basic_ostream<char>') and 'const char *')
+        cout < "Inside print 2 matrix function";
+        ~~~~ ^ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1 warning and 2 errors generated.
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+WW311WK01:~ nyusps$ ./matrixptr
+Inside the matrx gen function
+Inside the print matrix function
+V	T	F	L	Z	F	G	[	
+L	Z	Q	S	[	B	D	C	
+T	I	Q	K	U	D	N	Y	
+F	Q	^	]	N	G	O	Z	
+U	P	J	E	]	Q	Q	C	
+\	V	[	]	D	H	C	]	
+Q	T	F	N	D	Z	F	K	
+N	M	A	C	L	G	V	K	
+U	O	H	K	V	Y	K	T	
+O	L	I	R	Z	V	W	I	
+Inside print 2 matrix functionV	T	F	L	Z	F	G	[	
+L	Z	Q	S	[	B	D	C	
+T	I	Q	K	U	D	N	Y	
+F	Q	^	]	N	G	O	Z	
+U	P	J	E	]	Q	Q	C	
+\	V	[	]	D	H	C	]	
+Q	T	F	N	D	Z	F	K	
+N	M	A	C	L	G	V	K	
+U	O	H	K	V	Y	K	T	
+O	L	I	R	Z	V	W	I	
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+WW311WK01:~ nyusps$ g++ matrixptr.cpp -o matrixptr
+WW311WK01:~ nyusps$ ./matrixptr
+Inside the matrx gen function
+Inside the print matrix function
+V	T	F	L	Z	F	G	[	
+L	Z	Q	S	[	B	D	C	
+T	I	Q	K	U	D	N	Y	
+F	Q	^	]	N	G	O	Z	
+U	P	J	E	]	Q	Q	C	
+\	V	[	]	D	H	C	]	
+Q	T	F	N	D	Z	F	K	
+N	M	A	C	L	G	V	K	
+U	O	H	K	V	Y	K	T	
+O	L	I	R	Z	V	W	I	
+Inside print 2 matrix function
+V	T	F	L	Z	F	G	[	
+L	Z	Q	S	[	B	D	C	
+T	I	Q	K	U	D	N	Y	
+F	Q	^	]	N	G	O	Z	
+U	P	J	E	]	Q	Q	C	
+\	V	[	]	D	H	C	]	
+Q	T	F	N	D	Z	F	K	
+N	M	A	C	L	G	V	K	
+U	O	H	K	V	Y	K	T	
+O	L	I	R	Z	V	W	I	
+WW311WK01:~ nyusps$ vi matrixptr.cpp
+
+/*
+Synopsis: to manipulate a matrix via pointers
+*/
+
+#include <iostream>
+using namespace std;
+
+#include <stdlib.h> //for the seed and random number generator
+
+#define R 10 //number of rows
+#define C 8 // number of columns
+
+void Matrix_Gen(char* Matrix_ptr[], int row, int col);
+void print_Matrix(char* Matrix_ptr[], int row, int col);
+void print_Matrix2(char** Matrix_ptr_ptr, int row, int col);
+
+int main()
+{
+
+        char Matrix[R][C] = {'\0'};
+        char *Matrix_ptr[R] = {NULL};
+
+        char **Matrix_ptr_ptr = NULL; //char ptr to the array of char ptrs
+        Matrix_ptr_ptr = &Matrix_ptr[0];
+
+        unsigned long int seed = 1023;
+        srand(seed); //initializes the random number generator
+
+        //assign pointers to rows
+        for(int i = 0; i < R; ++i)
+                Matrix_ptr[i] = &Matrix[i][0]; //zeroth column
+
+        //populate matrix via array of pointers
+        Matrix_Gen(Matrix_ptr, R, C); //passing a ptr to an array of ptrs
+
+        print_Matrix(Matrix_ptr, R, C);
+
+        print_Matrix2(Matrix_ptr_ptr, R, C);
+
+return 0;
+}
+
+void Matrix_Gen(char* Matrix_ptr[], int row, int col)
+{
+        cout << "Inside the matrx gen function" << endl;
+        for(int i = 0; i < row; ++i)
+          for(int j = 0; j < col; ++j)
+            *(Matrix_ptr[i]+j) = 65 + (rand() % 30);  //will produce numbers < 100
+
+}
+
+void print_Matrix(char* Matrix_ptr[], int row, int col)
+{
+"matrixptr.cpp" 72L, 1735C
