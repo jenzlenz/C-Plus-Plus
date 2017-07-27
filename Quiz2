@@ -1,0 +1,63 @@
+/*
+Program Name: Quiz2.cpp
+Author: J Dooley
+Date: July 27, 2017
+Synopsis:
+Write a program that declares and initializes a character string to read as follows:
+char array[ ] = “To be or not to be, that is the question…..”
+
+Program should contain a function, char* str_char(char *array_ptr, char c),
+which outputs the memory location of the first occurrence of the letter ‘q’. 
+
+Program should contain a function int char_count(char *array_ptr, char o) which counts how many times a particular
+letter, ‘o’, appears in string.  
+If the
+letter is not found it returns zero.
+*/
+
+#include <iostream>
+using namespace std;
+
+char* str_char(char* array_ptr, char c);
+int char_count(char *array_ptr, char o);
+
+int main()
+{
+char array[] = “To be or not to be, that is the question”;
+char *array_ptr = &array[0];
+int oCount = 0;
+
+*array_ptr = str_char(*array_ptr, q);
+cout << "The first occurence of the letter q in the array is at this memory address "" << &array_ptr;
+
+*array_ptr = &array[0];  
+//reset the pointer to the beginning of the array
+
+oCount = char_count(char *array_ptr, o);
+cout << "There are " << oCount << " this number of o in the array." \n";
+
+return 0;
+}
+
+char* str_char(char* array_ptr, char q)
+{
+    while (*array_ptr != NULL) {    
+      if (*array_ptr == "q")
+        return &array[];
+      else
+        ++array_ptr; 
+    }
+}
+
+int char_count(char *array_ptr, char o);
+{
+  int oCount = 0;
+  while (*array_ptr != NULL) {
+    if (*array_ptr == o)
+        ++oCount;
+     ++array_ptr;
+  }
+  
+  return oCount; 
+}
+
