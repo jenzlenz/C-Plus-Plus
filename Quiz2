@@ -41,12 +41,23 @@ return 0;
 
 char* str_char(char* array_ptr, char q)
 {
-    while (*array_ptr != NULL) {    
-      if (*array_ptr == "q")
+    while (*array_ptr != NULL) 
+    {    
+      cout << "*array_ptr equals " << *array_ptr " .\n";
+      if (*array_ptr == "q")
+      {
+        cout << "*array_ptr is equal to q at this address: \n" << &array_ptr;
         return &array[];
+        break;
+      }
       else
+      {
+        cout << "array_ptr is NOT equal to q, move to the next char in the array \n";
         ++array_ptr; 
+      }
+    //needs to return 0 but the return type is char *  
     }
+    
 }
 
 int char_count(char *array_ptr, char o);
