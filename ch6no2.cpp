@@ -1,4 +1,4 @@
-/*************************************************************************************************
+/*
 Program Name: ch6no2.cpp
 Author: J Dooley
 Date: July 24, 2017
@@ -10,7 +10,7 @@ Include mutator functions to increase the count by one and decrease the count by
 No member function should allow the value of the counter to become negative.
 Include a member function that returns the current count value and one that outputs the count.
 Embed your class definition in a test program.
-*************************************************************************************************/
+*/
 
 #include <iostream>
 using namespace std;
