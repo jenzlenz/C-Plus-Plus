@@ -94,7 +94,7 @@ void calcMonthAcc(int **Matrix_ptr_ptr, int M, int Y)
 
 void print_Matrix(int* Matrix_ptr[], int row, int col)
 {
-  cout << endl;
+  cout << endl << "***** Printing the Rain Matrix *****" << endl;
   for(int i = 0; i < row; ++i)            
   {
     for(int j = 0; j < col; ++j)                
@@ -105,4 +105,6 @@ void print_Matrix(int* Matrix_ptr[], int row, int col)
   }
   cout << endl;
 }
+
+
 
