@@ -31,13 +31,9 @@ Rain_Gen(Matrix_ptr, R, C); //passing a ptr to an array of ptrs
 print_Matrix(Matrix_ptr, R, C);
 
 int YearAcc[R] = {'\0'};
-int *YearAcc_ptr = {NULL};
-YearAcc_ptr = &YearAcc[0];
 calcYearAcc(Matrix_ptr_ptr, R, C);
 
 int MonthAcc[C] = {'\0'};
-int *MonthAcc_ptr = {NULL};
-MonthAcc_ptr = &MonthAcc[0];
 calcMonthAcc(Matrix_ptr_ptr, R, C);
 
 return 0;
@@ -52,13 +48,10 @@ void Rain_Gen(int* Matrix_ptr[], int row, int col)
       *(Matrix_ptr[i]+j) = 65 + (rand() % 30);  //will produce numbers < 100
     }
   }
-  cout << "exiting rain gen function" << endl;
 }
 
 void calcYearAcc(int **Matrix_ptr_ptr, int M, int Y)
-{
-  cout << "Inside calcYearAcc function" << endl;
-  
+{  
   int yearAccum[R] = {0};    
   
      for (int i = 0; i < 5; ++i)
@@ -73,15 +66,13 @@ void calcYearAcc(int **Matrix_ptr_ptr, int M, int Y)
     
      for (int i = 0; i < 5; ++i)
      {
-       cout << "yearAccum[" << i << "] = " << yearAccum[i] << " ";
+       cout << "yearAccum[" << i << "] = " << yearAccum[i] << endl;
      }
-     cout << "\n Exiting calcYearAcc function " << endl;
+     cout << endl;
 }
 
 void calcMonthAcc(int **Matrix_ptr_ptr, int M, int Y) 
-{
-  cout << "Inside calcMonthAcc function " << endl;
-  
+{  
   int monthAccum[C] = {0};
   
      for (int j = 0; j < 12; ++j)
@@ -96,21 +87,22 @@ void calcMonthAcc(int **Matrix_ptr_ptr, int M, int Y)
     
      for (int i = 0; i < 12; ++i)
      {
-       cout << "monthAccum[" << i << "] = " << monthAccum[i] << " ";
+       cout << "monthAccum[" << i << "] = " << monthAccum[i] << endl;
      }
-
-  cout << "exiting calcMonthAcc function" << endl;
+     cout << endl;
 }
 
 void print_Matrix(int* Matrix_ptr[], int row, int col)
 {
+  cout << endl;
   for(int i = 0; i < row; ++i)            
   {
     for(int j = 0; j < col; ++j)                
     { 
      cout << *(Matrix_ptr[i]+j) << " ";
     }
-  cout << "\n exiting print_matrix function \n";
+  cout << endl;
   }
+  cout << endl;
 }
 
