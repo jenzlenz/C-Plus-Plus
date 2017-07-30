@@ -3,26 +3,18 @@
 using namespace std;
 #include <stdlib.h> //for the seed and random number generator
 
-#define R 5 //number of rows
-#define C 12 // number of columns
+#define R 5 //number of rows = years
+#define C 12 //number of columns = months
 
 void Rain_Gen(int* Matrix_ptr[], int row, int col);
-void print_Matrix(int* Matrix_ptr[]);
+//void print_ymMatrix(int* Matrix_ptr[], int size);
 void print_Matrix(int* Matrix_ptr[], int row, int col);
-void print_Matrix2(int** Matrix_ptr_ptr, int row, int col);
-int YearAcc(int** Matrix_ptr_ptr, int M, int Y);
-int MonthAcc(int** Matrix_ptr_ptr, int M, int Y);
+//void print_Matrix2(int** Matrix_ptr_ptr, int row, int col);
+void calcYearAcc(int** Matrix_ptr_ptr, int M, int Y);
+void calcMonthAcc(int** Matrix_ptr_ptr, int M, int Y);
 
 int main()
 {
-
-int YearAcc[R] = {'\0'};
-int *YearAcc_ptr = {NULL};
-int *YearAcc_ptr = &YearAcc[0];
-
-int MonthAcc[C] = {'\0'};
-int *MonthAcc_ptr = {NULL};
-int *MonthAcc_ptr = &MonthAcc[0];
 
 int Matrix[R][C] = {'\0'};        
 int *Matrix_ptr[R] = {NULL};
@@ -39,60 +31,99 @@ for(int i = 0; i < R; ++i)
 //populate matrix via array of pointers        
 Rain_Gen(Matrix_ptr, R, C); //passing a ptr to an array of ptrs
 print_Matrix(Matrix_ptr, R, C);
-print_Matrix2(Matrix_ptr_ptr, R, C);
-print_Matrix(YearAcc_ptr);
-print_Matrix(MonthAcc_ptr;
+
+int YearAcc[R] = {'\0'};
+int *YearAcc_ptr = {NULL};
+YearAcc_ptr = &YearAcc[0];
+calcYearAcc(Matrix_ptr_ptr, R, C);
+//print_ymMatrix(YearAcc_ptr, R);
+
+int MonthAcc[C] = {'\0'};
+int *MonthAcc_ptr = {NULL};
+MonthAcc_ptr = &MonthAcc[0];
+//calcMonthAcc(Matrix_ptr_ptr, R, C):
+//print_ymMatrix(MonthAcc_ptr, C);
 
 return 0;
 }
 
 void Rain_Gen(int* Matrix_ptr[], int row, int col){        
 cout << "Inside the Rain gen function" << endl;        
-for(int i = 0; i < row; ++i)          
-  for(int j = 0; j < col; ++j)            
+for(int i = 0; i < row; ++i)
+{          
+  for(int j = 0; j < col; ++j) 
+  {           
     *(Matrix_ptr[i]+j) = 65 + (rand() % 30);  //will produce numbers < 100
+  }
+}
+cout << "exiting rain gen function" << endl;
 }
 
-int YearAcc(int **Matrix_ptr_ptr, int M, int Y){
-  int yAccum = 0;
-  int YearAccum[R] = {0};
-  int yAccum_ptr = &yAccum[0];
+void calcYearAcc(int **Matrix_ptr_ptr, int M, int Y){
+  cout << "Inside calcYearAcc function" << endl;
+  int yearAccum[R] = {0};
+  //int *yAccum_ptr[] = {NULL};
+  //yAccum_ptr = &yearAccum[0];
     
-  for (int i = 0; i < Y; ++i)
-    for (j = 0; j < M; +j)
-      yAccum += **Matrix_ptr_ptr[i]+j;
-  YearAccum[i] = yAccum;
-  
-return yAccum_ptr;
+     for (int i = 0; i < 5; ++i)
+     {  
+       int yAccum = 0;
+       for (int j = 0; j < 12; ++j)
+       {
+          yAccum += Matrix_ptr_ptr[i][j];
+       }
+     yearAccum[i] = yAccum;
+     }
+    
+     for (int i = 0; i < 5; ++i)
+     {
+       cout << "yearAccum[" << i << "] = " << yearAccum[i] << " ";
+     }
+     cout << "\n Exiting calcYearAcc function " << endl;
 }
 
-int MonthAcc(int **Matrix_ptr_ptr, int M, int Y) {
-  int mAccum = 0;  
-  int MonthAccum[C] = {0};  
-  int mAccum_ptr = &mAccum[0];      
+void calcMonthAcc(int **Matrix_ptr_ptr, int M, int Y) {
+  cout << "Inside calcMonthAcc function " << endl;
+  int mAccum = 0;  
+  int monthAccum[C] = {0};
+  int *mAccum_ptr[] = {NULL};  
+  *mAccum_ptr = &monthAccum[0];      
   
-  for (int i = 0; i < M; ++i)    
-    for (j = 0; j < Y; +j)      
-      mAccum += **Matrix_ptr_ptr[i]+j;  
-      MonthAccum[i] = mAccum;  
-  
-  return mAccum_ptr;
+  for (int i = 0; i < M; ++i)    
+    for (int j = 0; j < Y; ++j)      
+    {
+      mAccum += Matrix_ptr_ptr[i][j];  
+      monthAccum[i] = mAccum;  
+      cout << "monthAccum[i] = " << monthAccum[i] << " ";
+    }
+  cout << "exiting calcMonthAcc function" << endl;
 }
-
-void print_Matrix(int* Matrix_ptr[]) {
- for (int i = 0, i < C; ++i)
+/*
+void print_ymMatrix(int* Matrix_ptr[], int size) 
+{
+ cout << "Inside the print_matrix function using int* matrix_ptr and int size ONLY.\n";
+ for (int i = 0; i < size; ++i)
   cout << Matrix_ptr[i];
- cout << endl; 
+ //cout << "Printed from print_matrix function" << endl; 
 }
-
-void print_Matrix(int* Matrix_ptr[], int row, int col){
-  for(int i = 0; i < row; ++i)            
-    for(int j = 0; j < col; ++j)                
-      cout << *(Matrix_ptr[i]+j) << endl;
+*/
+void print_Matrix(int* Matrix_ptr[], int row, int col)
+{
+  cout <<"INside the print matrix function using 3 params: Matrix_ptr, int row, int col.\n";
+  for(int i = 0; i < row; ++i)            
+  {
+    for(int j = 0; j < col; ++j)                
+    { 
+     cout << *(Matrix_ptr[i]+j) << " ";
+    }
+  cout << "exiting print_matrix function with 3 params \n";
+  }
 }
-
+/*
 void print_Matrix2(int** Matrix_ptr_ptr, int row, int col){
-  for(int i = 0; i < row; ++i)                
-    for(int j = 0; j < col; ++j)                      
+  for(int i = 0; i < row; ++i)                
+    for(int j = 0; j < col; ++j)                      
       cout << **(Matrix_ptr[i]+j) << endl;
 }
+*/
+
