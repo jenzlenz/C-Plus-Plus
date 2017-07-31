@@ -1,26 +1,3 @@
-/********************************************************************************
-Program Name: Point.c
-Author: J Dooley
-Date: July 30, 2017
-Synopsis:
-Write a program that declares this structure
-
-struct Point
-{
-int X;  //x coord
-int Y;  // y coord 
-float Radius;  //Radius = sqrt((X*X) + (Y*Y))
-}
-
-program must contain the following accessor functions:
-void setData(struct Point*, int u, int v);
-float getRadius(struct Point*)const;
-float getDistance(struct Point *P1, struct Point *P2)
-
-The program should create a Point P1 at(X=3, Y=4) and Point P2 at (X=10, Y=15).
-The program should output the distance between P1 and P2.
-**********************************************************************************/
-
 #include <stdio.h>
 #include <math.h>
 
@@ -60,26 +37,28 @@ int main()
 //function definitions
 
 void setData(struct Point *P, int u, int v){
-        struct Point Z;
-	Z.X = u;
-        Z.Y = v;
+	P->X = u;
+        P->Y = v;
+	printf("Inside setData function - after set \n");
 }
 
 float getRadius(struct Point *P){
-	struct Point *W;
 	float radius = 0.0;
-	radius = sqrt((W->X)*(W->X) + (W->Y)*(W->Y));
-	printf("Radius = %.4f", radius);
+	radius = ((P->X)*(P->X) + (P->Y)*(P->Y));
+	radius = sqrt(radius);
+	printf("Radius = %.4f\n", radius);
 
 return radius;
 }
 
 float getDistance(struct Point *P1, struct Point *P2){
- 	float distance = 0;
-	struct Point S, T;
-
-	printf("Distance = %.2f", distance);
+ 	float distance = 0.0;
+	distance = pow((P2->X - P1->X), 2.0) + pow((P2->Y - P1->Y), 2.0);
+	distance = sqrt(distance);
+	printf("Distance = %.2f\n", distance);
 
 return distance;
 }
+
+
 
