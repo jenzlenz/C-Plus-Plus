@@ -1,4 +1,4 @@
-#include <iostream>
+##include <iostream>
 #include <cmath>
 using namespace std;
 
@@ -25,9 +25,8 @@ int main()
 
 	A.getRadius();
 	B.getRadius();
-
-	A.getDistance(*A_ptr); 
-	B.getDistance(*B_ptr);	
+ 
+	A.getDistance(B);	
 
 return 0;
 }   
@@ -35,11 +34,10 @@ return 0;
 void Point::setData(int u, int v)
 {
 	cout << "**********Inside the setData function********* \n";
-	struct Point Z;
-
-	Z.X = u;
-	Z.Y = v;
-	
+	X = u;
+	Y = v;
+	cout << "X = " << X << endl;
+	cout << "Y = " << Y << endl;	
 	cout << "Point Data has been set " << endl;
 
 }
@@ -48,8 +46,7 @@ float Point::getRadius()const
 {
 	cout << "****************Inside the getRadius function*********** \n";
 	float radius = 0.0;
-	struct Point W;
-	radius = sqrt(((W.X) * (W.X)) + ((W.Y) * (W.Y)));
+	radius = sqrt((X*X)*(X*X) + (Y*Y)*(Y*Y));
 	cout << "Radius = " << radius << endl;
 	return (radius);
 }
@@ -58,7 +55,8 @@ float Point::getDistance(const Point &P)
 {
 	cout << "****************Inside the getDistance function************ \n";
 	float distance = 0.0;
-	struct Point T;
+	distance = pow((P.X - X), 2.0) + pow((P.Y - Y), 2.0);
+	distance = sqrt(distance); 
 	cout << "Distance = " << distance << endl;
 return (distance);
 }
