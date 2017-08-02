@@ -7,68 +7,69 @@ Write a program that declares and initializes a character string to read as foll
 char array[ ] = “To be or not to be, that is the question…..”
 
 Program should contain a function, char* str_char(char *array_ptr, char c),
-which outputs the memory location of the first occurrence of the letter ‘q’. 
+which outputs the memory location of the first occurrence of the letter ‘q’. 
 
 Program should contain a function int char_count(char *array_ptr, char o) which counts how many times a particular
-letter, ‘o’, appears in string.  
+letter, ‘o’, appears in string.  
 If the
 letter is not found it returns zero.
 */
 
 #include <iostream>
+#include <cstring>
+#include <string.h>
 using namespace std;
 
-char* str_char(char* array_ptr, char c);
-int char_count(char *array_ptr, char o);
+char* str_char(char *array_ptr, char letter);
+int char_count(char *array_ptr, char letter);
 
 int main()
 {
-char array[] = “To be or not to be, that is the question”;
+char array[] = "To be or not to be, that is the question";
 char *array_ptr = &array[0];
-int oCount = 0;
+int letterCount = 0;
 
-*array_ptr = str_char(*array_ptr, q);
-cout << "The first occurence of the letter q in the array is at this memory address "" << &array_ptr;
+char letter = 'q';
+array_ptr = str_char(array_ptr, letter);
+//The function str_char returned the char pointer, which is the value the pointer is at i.e 'q'
+// but the question was to return the address so need to cout << &array_ptr
+cout << "The first occurence of the letter q in the array is at this memory address " << &array_ptr << endl;
 
-*array_ptr = &array[0];  
+array_ptr = &array[0];  
 //reset the pointer to the beginning of the array
 
-oCount = char_count(char *array_ptr, o);
-cout << "There are " << oCount << " this number of o in the array." \n";
+letter = 'o';
+letterCount = char_count(array_ptr, letter);
+cout << "There are " << letterCount << " " << letter << "\'s in the array." << endl;
 
 return 0;
 }
-
-char* str_char(char* array_ptr, char q)
-{
-    while (*array_ptr != NULL) 
-    {    
-      cout << "*array_ptr equals " << *array_ptr " .\n";
-      if (*array_ptr == "q")
+/////////////////////////////////////////////////////////////////////////////////////////////
+char* str_char(char *array_ptr, char letter)
+{	
+    while ((*array_ptr != '\0') && (*array_ptr != 'q')) 
+    {    
+      if (*array_ptr != 'q')
       {
-        cout << "*array_ptr is equal to q at this address: \n" << &array_ptr;
-        return &array[];
-        break;
+        ++array_ptr;
       }
       else
       {
-        cout << "array_ptr is NOT equal to q, move to the next char in the array \n";
-        ++array_ptr; 
-      }
-    //needs to return 0 but the return type is char *  
-    }
-    
+       //*array_ptr is equal to q so end while loop and end function by returning the char*
+	 return array_ptr; 
+      }  
+    }    
 }
 
-int char_count(char *array_ptr, char o);
+int char_count(char *array_ptr, char letter)
 {
-  int oCount = 0;
-  while (*array_ptr != NULL) {
-    if (*array_ptr == o)
-        ++oCount;
+  // modified the function to take the value of the variable letter instead of using 'o'
+  int letterCount = 0;
+  while (*array_ptr != '\0') {
+    if (*array_ptr == letter)
+        ++letterCount;
      ++array_ptr;
   }
   
-  return oCount; 
+  return letterCount; 
 }
-
