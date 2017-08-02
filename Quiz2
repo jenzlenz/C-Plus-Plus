@@ -33,7 +33,7 @@ char letter = 'q';
 array_ptr = str_char(array_ptr, letter);
 //The function str_char returned the char pointer, which is the value the pointer is at i.e 'q'
 // but the question was to return the address so need to cout << &array_ptr
-cout << "The first occurence of the letter q in the array is at this memory address " << &array_ptr << endl;
+cout << "The first occurence of the letter " << letter << " in the array is at this memory address " << &array_ptr << endl;
 
 array_ptr = &array[0];  
 //reset the pointer to the beginning of the array
@@ -47,17 +47,12 @@ return 0;
 /////////////////////////////////////////////////////////////////////////////////////////////
 char* str_char(char *array_ptr, char letter)
 {	
-    while ((*array_ptr != '\0') && (*array_ptr != 'q')) 
-    {    
-      if (*array_ptr != 'q')
-      {
-        ++array_ptr;
-      }
+    while ((*array_ptr != '\0') && (*array_ptr != 'q')){    
+      if (*array_ptr != 'q') //not the end of the array and not q so increment to the next position
+             ++array_ptr;
       else
-      {
-       //*array_ptr is equal to q so end while loop and end function by returning the char*
-	 return array_ptr; 
-      }  
+             //*array_ptr is equal to q so end while loop and end function by returning the char*
+	     return array_ptr; 
     }    
 }
 
