@@ -30,7 +30,7 @@ int main()
 
   Poly P3; //create a poly p3 using default constructor
   Poly P1(1); //create poly with order zero,  all coeffs 1
-  Poly P2(1,myarray1); //doesn't compile
+  Poly P2(1,myarray1); 
 
 return 0;
 }
