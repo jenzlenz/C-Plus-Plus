@@ -18,10 +18,10 @@ private:
 public:
 
 //constructors and deconstructor
-  Point(); //default constructor
-  Point(int, int, int); //parameterized constructor
-  ~Point(); //deconstructor
-//add copy constructor
+  Point(); 			//default constructor
+  Point(int, int, int); 	//parameterized constructor
+  ~Point(); 			//deconstructor
+  Point(const Point & rhs); 	//copy constructor
 
 //mutators and accessors
   void reset(int x, int y, int z); //resets the values of x, y, z
@@ -44,11 +44,10 @@ public:
 int main()
 {
 
-Point A();
+Point A;
 Point B(3,4,5);
 Point C(2,4,6);
-
-
+Point D = B; //uses copy constructor
 
 return 0;
 }
@@ -62,9 +61,19 @@ Point::Point(int X, int Y, int Z):X(X),Y(Y),Z(Z){
 }
 
 Point::~Point(){
-  //delete []Z;    //deallocate memory on the heap, but x,y,z are on the stack....????
+  //deconstructor is empty because here is no object to create on the heap
+  //int are created on the stack
   cout << "deconstructor" << endl;
 }
+
+Point::Point(const Point & rhs){
+  cout << "Entering copy constructor \n";
+  this->X = rhs.X;
+  this->Y = rhs.Y;
+  this->Z = rhs.Z;
+  cout << "Exiting copy contructor \n";
+}
+
 void Point::reset(int a, int b, int c){
   X = a;
   Y = b;
