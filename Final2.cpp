@@ -80,6 +80,12 @@ cout << "A.Z = " << num;
 num = B.getz();
 cout << " B.Z = " << num << endl;
 
+//verify the boolean equality overloaded operator
+bool isequal = (A==B);
+cout << "A==B is " << isequal << "\n";
+isequal = (C==B);
+cout << "C==B is " << isequal << "\n";
+
 return 0;
 }
 
@@ -152,6 +158,20 @@ Point Point::operator=(const Point &rhs){
 };
 
 bool Point::operator==(const Point &rhs){
-
-}; //equality of two points
+  cout << "Entering boolean equality overloaded operator " << endl;
+  if (rhs.X != this->X)
+  {
+     return false;
+  }
+  else if (rhs.Y != this->Y)
+       {
+          return false;
+       }
+       else if (rhs.Z != this->Z)
+            {
+               return false;
+            }
+            else
+                 return true;
+};
 
