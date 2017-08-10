@@ -65,6 +65,21 @@ cout << "A.Z = " << num << endl;
 int distance = C - B;
 cout << "Distance C - B = " << distance << endl;
 
+//verify overloaded assignment operator - this function uses two already existing obects
+A=B;
+num = A.getx();
+cout << "A.X = " << num;
+num = B.getx();
+cout << " B.X = " << num << endl;
+num = A.gety();
+cout << "A.Y = " << num;
+num = B.gety();
+cout << " B.Y = " << num << endl;
+num = A.getz();
+cout << "A.Z = " << num;
+num = B.getz();
+cout << " B.Z = " << num << endl;
+
 return 0;
 }
 
@@ -115,11 +130,8 @@ int Point::operator-(const Point &rhs){
    int distance = 0;
    
    difXcoord = this->X - rhs.X;
-   cout << "difXcoord = " << difXcoord;
    difYcoord = this->Y - rhs.Y;
-   cout << "difYcoord = " << difYcoord;
    difZcoord = this->Z - rhs.Z;
-   cout << "difZcoord = " << difZcoord; 
 
    distance = pow(difXcoord, 2) + pow(difYcoord,2) + pow(difZcoord,2);
    distance = sqrt(distance);
@@ -132,8 +144,12 @@ Point Point::operator*(int scale){
 }; //rescale a point P2=P1*3; for example
  
 Point Point::operator=(const Point &rhs){
+   cout << "Entering the overloaded assignment operator " << endl;
+   this->X = rhs.X;
+   this->Y = rhs.Y;
+   this->Z = rhs.Z;
 
-}; //assignment of P2=P1;
+};
 
 bool Point::operator==(const Point &rhs){
 
