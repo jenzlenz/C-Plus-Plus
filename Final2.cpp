@@ -8,6 +8,7 @@ Design and code a point class in C++
 
 #include <iostream>
 #include <cstring>
+#include <cmath>
 using namespace std;
 
 class Point
@@ -49,6 +50,21 @@ Point B(3,4,5);
 Point C(2,4,6);
 Point D = B; //uses copy constructor
 
+int num = 0;
+A.reset(6, 7, 8);
+num = A.getx();
+cout << "A.X = " << num << endl;
+num = A.gety();
+cout << "A.Y = " << num << endl;
+num = A.getz();
+cout << "A.Z = " << num << endl;
+
+//exam requested distance between y - x, in my program the equivalent points are C - B
+//because the exam requested to return an int for the distance, the distance equals = 1, 
+//but really the true distance is 1.414214 - should really return a float
+int distance = C - B;
+cout << "Distance C - B = " << distance << endl;
+
 return 0;
 }
 
@@ -71,7 +87,6 @@ Point::Point(const Point & rhs){
   this->X = rhs.X;
   this->Y = rhs.Y;
   this->Z = rhs.Z;
-  cout << "Exiting copy contructor \n";
 }
 
 void Point::reset(int a, int b, int c){
@@ -91,4 +106,36 @@ int Point::gety()const{
 int Point::getz()const{
   return Z;
 }
+
+int Point::operator-(const Point &rhs){
+//distance is sqrt of the sum of the squared differences between Point(x,y,z) and rhs(x,y,z)
+   int difXcoord = 0;
+   int difYcoord = 0;
+   int difZcoord = 0;
+   int distance = 0;
+   
+   difXcoord = this->X - rhs.X;
+   cout << "difXcoord = " << difXcoord;
+   difYcoord = this->Y - rhs.Y;
+   cout << "difYcoord = " << difYcoord;
+   difZcoord = this->Z - rhs.Z;
+   cout << "difZcoord = " << difZcoord; 
+
+   distance = pow(difXcoord, 2) + pow(difYcoord,2) + pow(difZcoord,2);
+   distance = sqrt(distance);
+
+return distance;
+};
+ 
+Point Point::operator*(int scale){
+
+}; //rescale a point P2=P1*3; for example
+ 
+Point Point::operator=(const Point &rhs){
+
+}; //assignment of P2=P1;
+
+bool Point::operator==(const Point &rhs){
+
+}; //equality of two points
 
