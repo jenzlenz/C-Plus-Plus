@@ -7,7 +7,7 @@ Design and code a point class in C++
 */
 
 #include <iostream>
-#include <cstring>
+#include <cstdlib>
 #include <cmath>
 using namespace std;
 
@@ -38,55 +38,55 @@ public:
 
 //friend functions
   friend Point operator*(int, Point &rhs); //rescale the point, P2=3*P1;
-  //friend ostream & operator<<(ostream &os, Pointe &X);  
+  friend ostream &operator << (ostream& output, Point &pt);  
 
 };
 
 int main()
 {
 
-Point A; //uses default constructor
+Point A; 	//uses default constructor
 Point B(3,4,5); //uses parameterized constructor
 Point C(2,4,6); //uses parameterized constructor
-Point D = B; //uses copy constructor
+Point D = B; 	//uses copy constructor
 
 int num = 0;
-A.reset(6, 7, 8); //uses reset mutator
-num = A.getx(); //uses accessor
+A.reset(6, 7, 8); 	//uses reset mutator
+num = A.getx(); 	//uses accessor
 cout << "A.X = " << num << endl;
-num = A.gety(); //uses accessor
+num = A.gety(); 	//uses accessor
 cout << "A.Y = " << num << endl;
-num = A.getz(); //uses accessor
+num = A.getz(); 	//uses accessor
 cout << "A.Z = " << num << endl;
 
 //exam requested distance between y - x, in my program the equivalent points are C - B
 //because the exam requested to return an int for the distance, the distance equals = 1, 
 //but really the true distance is 1.414214 - should really return a float
-int distance = C - B; //uses overloaded operator-
+int distance = C - B; 	//uses overloaded operator-
 cout << "Distance C - B = " << distance << endl;
 
 //verify overloaded assignment operator - this function uses two already existing obects
-A=B; //uses overloadd assignment operator
-num = A.getx(); //accessor
+A=B; 			//uses overloaded assignment operator
+num = A.getx(); 	//accessor
 cout << "A.X = " << num;
-num = B.getx(); //accessor
+num = B.getx(); 	//accessor
 cout << " B.X = " << num << endl;
-num = A.gety(); //accessor
+num = A.gety(); 	//accessor
 cout << "A.Y = " << num;
-num = B.gety(); //accessor
+num = B.gety(); 	//accessor
 cout << " B.Y = " << num << endl;
-num = A.getz(); //accessor
+num = A.getz(); 	//accessor
 cout << "A.Z = " << num;
-num = B.getz(); //accessor
+num = B.getz(); 	//accessor
 cout << " B.Z = " << num << endl;
 
 //verify the boolean equality overloaded operator
-bool isequal = (A==B); //uses overladed boolean equality operator
+bool isequal = (A==B); 		//uses overladed boolean equality operator
 cout << "A==B is " << isequal << "\n";
-isequal = (C==B); //uses overloaded boolean equality operator
+isequal = (C==B); 		//uses overloaded boolean equality operator
 cout << "C==B is " << isequal << "\n";
 
-//verify scale Point i.e. X*5
+//verify scale Point X*5
 A.reset(5,5,5);
 A = A*5;
 num = A.getx();
@@ -95,8 +95,7 @@ num = A.gety();
 cout << "  A.Y = " << num;
 num = A.getz();
 cout << "  A.Z = " << num;
-cout << "\n End of X*5 overload \n";
-
+cout << "\n End of X*5 overload " << endl;
 
 //verify scale Point 10*X
 A.reset(10,10,10);
@@ -107,8 +106,14 @@ num = A.gety();
 cout << "  A.Y = " << num;
 num = A.getz();
 cout << "  A.Z = " << num;
-cout << "\n End of 10*X overload \n";
+cout << "\n End of 10*X overload " << endl;
 
+cout << "Verifying ostream overloaded operator " << endl;
+cout << A << endl;
+cout << B << endl;
+cout << C << endl;
+cout << D << endl;
+cout << "End of ostream verification. " << endl;
 
 return 0;
 }
@@ -210,3 +215,7 @@ bool Point::operator==(const Point &rhs){
                  return true;
 };
 
+ostream &operator << (ostream& output, Point &pt){
+   output << "Point(" << pt.X << "," << pt.Y << "," << pt.Z << ")" << endl;
+return output;
+};
