@@ -32,12 +32,12 @@ public:
 
 //overloaded operators
   int operator-(const Point &rhs); //distance between two points
-  Point operator*(int scale); //rescale a point P2=P1*3; for example
+  Point operator*(int scalar); //rescale P2=P1*3
   Point operator=(const Point &rhs); //assignment of P2=P1;
   bool operator==(const Point &rhs); //equality of two points
 
 //friend functions
-  //friend Point operator*(it, Point &); //rescale the point, P2=3*P1;
+  friend Point operator*(int, Point &rhs); //rescale the point, P2=3*P1;
   //friend ostream & operator<<(ostream &os, Pointe &X);  
 
 };
@@ -45,46 +45,70 @@ public:
 int main()
 {
 
-Point A;
-Point B(3,4,5);
-Point C(2,4,6);
+Point A; //uses default constructor
+Point B(3,4,5); //uses parameterized constructor
+Point C(2,4,6); //uses parameterized constructor
 Point D = B; //uses copy constructor
 
 int num = 0;
-A.reset(6, 7, 8);
-num = A.getx();
+A.reset(6, 7, 8); //uses reset mutator
+num = A.getx(); //uses accessor
 cout << "A.X = " << num << endl;
-num = A.gety();
+num = A.gety(); //uses accessor
 cout << "A.Y = " << num << endl;
-num = A.getz();
+num = A.getz(); //uses accessor
 cout << "A.Z = " << num << endl;
 
 //exam requested distance between y - x, in my program the equivalent points are C - B
 //because the exam requested to return an int for the distance, the distance equals = 1, 
 //but really the true distance is 1.414214 - should really return a float
-int distance = C - B;
+int distance = C - B; //uses overloaded operator-
 cout << "Distance C - B = " << distance << endl;
 
 //verify overloaded assignment operator - this function uses two already existing obects
-A=B;
-num = A.getx();
+A=B; //uses overloadd assignment operator
+num = A.getx(); //accessor
 cout << "A.X = " << num;
-num = B.getx();
+num = B.getx(); //accessor
 cout << " B.X = " << num << endl;
-num = A.gety();
+num = A.gety(); //accessor
 cout << "A.Y = " << num;
-num = B.gety();
+num = B.gety(); //accessor
 cout << " B.Y = " << num << endl;
-num = A.getz();
+num = A.getz(); //accessor
 cout << "A.Z = " << num;
-num = B.getz();
+num = B.getz(); //accessor
 cout << " B.Z = " << num << endl;
 
 //verify the boolean equality overloaded operator
-bool isequal = (A==B);
+bool isequal = (A==B); //uses overladed boolean equality operator
 cout << "A==B is " << isequal << "\n";
-isequal = (C==B);
+isequal = (C==B); //uses overloaded boolean equality operator
 cout << "C==B is " << isequal << "\n";
+
+//verify scale Point i.e. X*5
+A.reset(5,5,5);
+A = A*5;
+num = A.getx();
+cout << "A.X = " << num;
+num = A.gety();
+cout << "  A.Y = " << num;
+num = A.getz();
+cout << "  A.Z = " << num;
+cout << "\n End of X*5 overload \n";
+
+
+//verify scale Point 10*X
+A.reset(10,10,10);
+A = 10*A;
+num = A.getx();
+cout << "A.X = " << num;
+num = A.gety();
+cout << "  A.Y = " << num;
+num = A.getz();
+cout << "  A.Z = " << num;
+cout << "\n End of 10*X overload \n";
+
 
 return 0;
 }
@@ -105,9 +129,9 @@ Point::~Point(){
 
 Point::Point(const Point & rhs){
   cout << "Entering copy constructor \n";
-  this->X = rhs.X;
-  this->Y = rhs.Y;
-  this->Z = rhs.Z;
+  X = rhs.X;
+  Y = rhs.Y;
+  Z = rhs.Z;
 }
 
 void Point::reset(int a, int b, int c){
@@ -144,10 +168,21 @@ int Point::operator-(const Point &rhs){
 
 return distance;
 };
- 
-Point Point::operator*(int scale){
 
-}; //rescale a point P2=P1*3; for example
+Point Point::operator*(int scalar){
+   cout << "Entering the scalar overloaded operator X*5" << endl;
+   X = X * scalar;
+   Y = Y * scalar;
+   Z = Z * scalar;
+
+return *this;
+}; 
+
+Point operator*(int scale, Point &rhs){
+   cout << "Entering the scalar overloaded operator 10*X" << endl;
+return Point(scale * rhs.X, scale * rhs.Y, scale * rhs.Z);
+};
+
  
 Point Point::operator=(const Point &rhs){
    cout << "Entering the overloaded assignment operator " << endl;
