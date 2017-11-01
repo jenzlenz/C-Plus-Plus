@@ -56,6 +56,7 @@ return 0;
 void mergeTwoFiles(ifstream& fileA, ifstream& fileB, ofstream& fout)
 {
   cout << "inside of the function mergeTwoFiles" << endl;
+  
   int next;
   while (fileA >> next)
   {
@@ -67,11 +68,6 @@ void mergeTwoFiles(ifstream& fileA, ifstream& fileB, ofstream& fout)
   {
     fout << next << endl;
     cout << "while loop for fileB" << endl;
-  }
-
-  while (fout >> next)
-  {
-     cout << next << endl;
   }
 }
 
