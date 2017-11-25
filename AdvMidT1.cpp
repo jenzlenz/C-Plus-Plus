@@ -25,7 +25,7 @@ static int count;
 
 public:
 //constructors
-Shape();//default
+Shape();//default constructor
 Shape(int X, int Y, float Area, COLOR color);//parameterized constructor
 ~Shape();//destructor
 Shape(const Shape &rhs);//copy constructor
@@ -44,7 +44,7 @@ float getArea() const;
 COLOR getColor() const;
 };
 
-int Shape::count = 0;
+int Shape::count = 0; // initialization of static int count variable must be outside of class
 
 int main()
 {
@@ -122,8 +122,8 @@ cout << "Drawing SHAPE" << endl;
 }
 
 void Shape::resetLocation(int deltaX, int deltaY){
-x = x + deltaX;
-y = y + deltaY;
+x += deltaX;
+y += deltaY;
 //cout << "SHAPE reset location function" << endl;
 }
 
