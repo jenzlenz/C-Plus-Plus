@@ -5,13 +5,16 @@ Date: November 26, 2017
 Synopsis:
 Design and code a point class in C++.  
 Demonstrate exception handling if any of the coordinates are negative.  
-Integrate the Poin class inside a class Person.
+Integrate the Point class inside a class Person.
 */
 
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
 using namespace std;
+
+class negativeXCoord{}; //for exception try/throw/catch 
+class negativeYCoord{}; //for exception try/throw/catch
 
 class Point
 {
@@ -106,6 +109,11 @@ cout << C << endl;
 cout << D << endl;
 cout << "End of ostream verification. " << endl << endl;
 
+Point E(-1,0);
+Point F(0,-1);
+Point G(-1,-1);
+Point H(0,0);
+
 return 0;
 }
 
@@ -114,8 +122,23 @@ Point::Point():X(0),Y(0){
 }
 
 Point::Point(int X, int Y):X(X),Y(Y){
+  try{
+  if (X < 0)
+     throw negativeXCoord();
+  if (Y < 0)
+     throw negativeYCoord();
+  } //end of try block
+
+  catch(negativeXCoord){
+     cout << "X coordinate of point can NOT be negative.  X entered was: " << X << endl << endl; 
+  } //end of catch block 
+  catch(negativeYCoord){
+     cout << "Y coordinate of point can NOT be negative.  Y entered was: " << Y << endl << endl;                
+  } //end of catch block
+
   cout << "Parameterized constructor" << endl;
 }
+
 
 Point::~Point(){
   //deconstructor is empty because here is no object to create on the heap
