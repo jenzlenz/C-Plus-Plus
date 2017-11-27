@@ -23,7 +23,7 @@ private:
 
 public:
 
-//constructors and deconstructor
+//constructors and destructor
   Point(); 			//default constructor
   Point(int, int);      	//parameterized constructor
   ~Point(); 			//destructor
@@ -33,7 +33,7 @@ public:
   void reset(int x, int y); //resets the values of x, y
   int getx()const; //gets and returns X for a given point object
   int gety()const; //gets and returns Y fr a given point object
-  
+
 //overloaded operators
   int operator-(const Point &rhs); //distance between two points
   Point operator*(int scalar); //rescale P2=P1*3
@@ -43,6 +43,7 @@ public:
 //friend functions
   friend Point operator*(int, Point &rhs); //rescale the point, P2=3*P1;
   friend ostream &operator << (ostream& output, Point &pt);  
+  friend void foo(Point &x, Point y); //prints x and y coords by reference and by value
 
 };
 
@@ -109,6 +110,9 @@ cout << C << endl;
 cout << D << endl;
 cout << "End of ostream verification. " << endl << endl;
 
+Point *ptr = new Point(-2,3);
+foo(*ptr, C); //passing point objects by reference and by value and printing x,y coordinates
+
 Point E(-1,0);
 Point F(0,-1);
 Point G(-1,-1);
@@ -164,6 +168,12 @@ int Point::getx()const{
 int Point::gety()const{
   return Y;
 }
+
+void foo(Point &x, Point y){
+  cout << endl << "Inside function foo " << endl;
+  cout << "Point by reference: (" << x.X << "," << x.Y << ")" << endl;
+  cout << "Point by value: (" << y.X << "," << y.Y << ")" << endl << endl;
+};
 
 int Point::operator-(const Point &rhs){
 //distance is sqrt of the sum of the squared differences between Point(x,y,z) and rhs(x,y,z)
