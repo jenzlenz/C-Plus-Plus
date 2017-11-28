@@ -65,7 +65,7 @@ public:
   Person(const Person &rhs);
 
 //mutators and accessors
-//  char getName() const;
+  const char*  getName() const;
   int getAge() const;
   Point getGPS() const;
 
@@ -141,13 +141,28 @@ Point *ptr = new Point(-2,3);
 foo(*ptr, C); 
 
 //testing for negative value in Point objects
+cout << "Testing for negative values in Point objects. " << endl << endl;  
 Point E(-1,0);
 Point F(0,-1);
 Point G(-1,-1);
 
+//Testing Person class
+cout << "Testing Person class" << endl << endl;
 Person Z; //default constructor
+//cout << "Person Z has age = " << Z.getAge() << endl << endl;
+//cout << "Person Z has name = " << Z.getName() << endl << endl;
+//cout << "Person Z has GPS = " << Z.getGPS().getx() <<  " " << Z.getGPS().gety() << endl << endl;
+
 Person X("Joe Doe", 33, 10, 15);
+//cout << "Person X has age = " << X.getAge() << endl << endl;
+//cout << "Person X has name = " << X.getName() << endl << endl;
+//cout << "Person X has GPS = " << X.getGPS() << endl << endl;
+
 Person Y("Mary Joe", 22, 20, 30);
+//cout << "Person Y has age = " << Y.getAge() << endl << endl;
+//cout << "Person Y has name = " << Y.getName() << endl << endl;
+//cout << "Person Y has GPS = " << Y.getGPS() << endl << endl;
+
 cout << "The distance between Person X and Person Y is: " << Y-X << endl;
 
 return 0;
@@ -177,13 +192,11 @@ Point::Point(int X, int Y):X(X),Y(Y){
 
 
 Point::~Point(){
-  //deconstructor is empty because here is no object to create on the heap
-  //int are created on the stack
-  cout << "destructor" << endl;
+  cout << "POINT destructor" << endl;
 }
 
 Point::Point(const Point & rhs){
-  cout << "Entering copy constructor \n";
+  cout << "Entering POINT copy constructor \n";
   X = rhs.X;
   Y = rhs.Y;
 }
@@ -263,51 +276,46 @@ return output;
 };
 
 Person::Person(){
-   cout << "Person default constructor" << endl << endl;
    for (int i=0; i<32; i++)
         Name[i]='\0';
    int Age = 0;
    GPS.reset(0,0);
+   cout << "PERSON default constructor" << endl << endl;
 };
 
 Person::Person(char *name, int age, int x, int y):Age(age),GPS(x,y){
-   cout << "Person parameterized constructor " << endl << endl;
    int len = strlen(name) + 1;
    name = new char[len];
    strcpy(Name, name);
-   //Age = age;
-   //GPS.X = x;
-   //GPS.Y = y;
+   cout << "PERSON parameterized constructor " << endl << endl;
 };
 
 Person::~Person(){
-   cout << "Person destructor " << endl << endl;
+   cout << "PERSON destructor " << endl << endl;
 };
 
 Person::Person(const Person &rhs){
-   cout << "Person copy constructor " << endl << endl;
    strcpy(Name, rhs.Name);//I know this is a shallow copy
    
-//deep copy does NOT compile
+//deep copy does NOT compile - what is wrong??
 //   delete[]Name;
 //   Name = new char[strlen(rhs.Name)+1];
 //   strcpy(Name, rhs.Name);
 //end deep copy
+
    Age = rhs.Age;
    GPS = rhs.GPS;
+   cout << "PERSON copy constructor " << endl << endl;
 };
 
-// this does not compile
-//char Person::getName(){
-//   return Name;
-//};
+const char* Person::getName()const {
+   return Name;
+};
  
-
 int Person::getAge()const{
    return Age;
 };
   
-
 Point Person::getGPS()const{
    return GPS;
 };
@@ -324,4 +332,5 @@ int Person::operator-(const Person &rhs){
    distance = sqrt(distance);
 
 return distance;
+
 };
