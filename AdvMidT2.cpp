@@ -60,13 +60,13 @@ public:
 
 //constructors and destructor
   Person();
-  Person(char *, int, Point);
+  Person(char *, int, int x, int y);
   ~Person();
   Person(const Person &rhs);
 
 //mutators and accessors
 //  char getName() const;
-//  int getAge() const;
+  int getAge() const;
   Point getGPS() const;
 
 //overloaded operators
@@ -136,13 +136,19 @@ cout << C << endl;
 cout << D << endl;
 cout << "End of ostream verification. " << endl << endl;
 
+//passing point objects by reference and by value and printing x,y coordinates
 Point *ptr = new Point(-2,3);
-foo(*ptr, C); //passing point objects by reference and by value and printing x,y coordinates
+foo(*ptr, C); 
 
+//testing for negative value in Point objects
 Point E(-1,0);
 Point F(0,-1);
 Point G(-1,-1);
-Point H(0,0);
+
+Person Z; //default constructor
+Person X("Joe Doe", 33, 10, 15);
+Person Y("Mary Joe", 22, 20, 30);
+cout << "The distance between Person X and Person Y is: " << Y-X << endl;
 
 return 0;
 }
@@ -264,13 +270,14 @@ Person::Person(){
    GPS.reset(0,0);
 };
 
-Person::Person(char *name, int age, Point gps){
+Person::Person(char *name, int age, int x, int y):Age(age),GPS(x,y){
    cout << "Person parameterized constructor " << endl << endl;
    int len = strlen(name) + 1;
    name = new char[len];
    strcpy(Name, name);
-   Age = age;
-   GPS = gps;
+   //Age = age;
+   //GPS.X = x;
+   //GPS.Y = y;
 };
 
 Person::~Person(){
@@ -290,15 +297,16 @@ Person::Person(const Person &rhs){
    GPS = rhs.GPS;
 };
 
-/* this does not compile
-char Person::getName(){
-   return Name;
-};
+// this does not compile
+//char Person::getName(){
+//   return Name;
+//};
+ 
 
 int Person::getAge()const{
    return Age;
 };
-*/  
+  
 
 Point Person::getGPS()const{
    return GPS;
