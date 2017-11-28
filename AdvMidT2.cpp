@@ -11,6 +11,8 @@ Integrate the Point class inside a class Person.
 #include <iostream>
 #include <cstdlib>
 #include <cmath>
+#include <string>
+#include <cstring>
 using namespace std;
 
 class negativeXCoord{}; //for exception try/throw/catch 
@@ -18,7 +20,7 @@ class negativeYCoord{}; //for exception try/throw/catch
 
 class Point
 {
-private:
+protected:
   int X, Y;
 
 public:
@@ -45,6 +47,30 @@ public:
   friend ostream &operator << (ostream& output, Point &pt);  
   friend void foo(Point &x, Point y); //prints x and y coords by reference and by value
 
+};
+
+class Person
+{
+private:
+char Name[32];
+int Age;
+Point GPS;
+
+public:
+
+//constructors and destructor
+  Person();
+  Person(char *, int, Point);
+  ~Person();
+  Person(const Person &rhs);
+
+//mutators and accessors
+//  char getName() const;
+//  int getAge() const;
+  Point getGPS() const;
+
+//overloaded operators
+  int operator-(const Person &rhs);
 };
 
 int main()
@@ -228,4 +254,66 @@ bool Point::operator==(const Point &rhs){
 ostream &operator << (ostream& output, Point &pt){
    output << "Point(" << pt.X << "," << pt.Y << ")" << endl;
 return output;
+};
+
+Person::Person(){
+   cout << "Person default constructor" << endl << endl;
+   for (int i=0; i<32; i++)
+        Name[i]='\0';
+   int Age = 0;
+   GPS.reset(0,0);
+};
+
+Person::Person(char *name, int age, Point gps){
+   cout << "Person parameterized constructor " << endl << endl;
+   int len = strlen(name) + 1;
+   name = new char[len];
+   strcpy(Name, name);
+   Age = age;
+   GPS = gps;
+};
+
+Person::~Person(){
+   cout << "Person destructor " << endl << endl;
+};
+
+Person::Person(const Person &rhs){
+   cout << "Person copy constructor " << endl << endl;
+   strcpy(Name, rhs.Name);//I know this is a shallow copy
+   
+//deep copy does NOT compile
+//   delete[]Name;
+//   Name = new char[strlen(rhs.Name)+1];
+//   strcpy(Name, rhs.Name);
+//end deep copy
+   Age = rhs.Age;
+   GPS = rhs.GPS;
+};
+
+/* this does not compile
+char Person::getName(){
+   return Name;
+};
+
+int Person::getAge()const{
+   return Age;
+};
+*/  
+
+Point Person::getGPS()const{
+   return GPS;
+};
+
+int Person::operator-(const Person &rhs){
+   int difXcoord = 0;
+   int difYcoord = 0;
+   int distance = 0;
+   
+   difXcoord = GPS.getx() - rhs.GPS.getx();
+   difYcoord = GPS.gety() - rhs.GPS.gety();
+
+   distance = pow(difXcoord, 2) + pow(difYcoord,2);
+   distance = sqrt(distance);
+
+return distance;
 };
