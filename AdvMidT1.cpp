@@ -36,6 +36,7 @@ int getX() const;
 int getY() const;
 float getArea() const;
 COLOR getColor() const;
+string getShapeType() const;
 
 //mutators
 void setX(int X);
@@ -48,6 +49,7 @@ virtual void setShapeType() = 0;//virtual
 virtual float calcArea() = 0;//virtual
 virtual void drawObject() = 0;//virtual
 void resetLocation(int deltaX, int deltaY);
+//void SortShape(Shape* S_ptr[], int n); not compiling
 
 };
 
@@ -220,12 +222,16 @@ shape_ptr[4] = new Rectangle(100, 100, 5, 15);
 shape_ptr[5] = new Doughnut(40, 70, 5, 15);
 
 for (int i=0; i<6; ++i){
-   cout << "X = " << shape_ptr[i]->getX() << endl;
-   cout << "Y = " << shape_ptr[i]->getY() << endl;
+   cout << "Object " << i+1 << " is a: " << shape_ptr[i]->getShapeType() << " ";
+   cout << "X = " << shape_ptr[i]->getX() << " ";
+   cout << "Y = " << shape_ptr[i]->getY() << " ";
    shape_ptr[i]->calcArea();
-   cout << "Area = " << shape_ptr[i]->getArea() << endl;
+   cout << "Area = " << shape_ptr[i]->getArea() << " ";
    cout << "Color = " << shape_ptr[i]->getColor() << endl;
-   //shape_ptr[i]->getShapeType();
+   
+   
+//SortShape(*shape_ptr[], 6); not compiling
+
 };
 
 
@@ -339,11 +345,30 @@ COLOR Shape::getColor()const{
 return color;
 }
 
+string Shape::getShapeType() const{
+return shapeType;
+};
+
+/* not compiling
+void Shape::SortShape(Shape* S_ptr[], int n){
+//Sorting by the area of each shape
+	for(int i = 0; i<=4; i++)
+        for(int j=i+1; j <= n; j++)
+            if(S_ptr(i)->getArea() > S_ptr(j)->getArea())
+            {
+                float temp = *S_ptr();
+                *S_ptr(i) = *S_ptr(j);
+                *S_ptr(j) = temp;
+            } 
+};
+not compiling */
+
 Circle::Circle(){
 setX(0);
 setY(0);
 setRadius(0);
 setColor(violet);
+setShapeType();
 cout << "CIRCLE default constructor: count = " << count << endl;
 }; //default constructor
 
@@ -352,6 +377,7 @@ setX(X);
 setY(Y);
 radius = Radius;
 setColor(violet);
+setShapeType();
 cout << "CIRCLE parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
@@ -360,6 +386,7 @@ setX(rhs.x);
 setY(rhs.y);
 radius = rhs.radius;
 setColor(rhs.color);
+shapeType= rhs.shapeType;
 }; //copy constructor
 
 Circle::~Circle(){
@@ -411,6 +438,7 @@ Triangle::Triangle():base(0), height(0){
 setX(x);
 setY(y);
 setColor(orange);
+setShapeType();
 cout << "TRIANGLE default constructor: count = " << count << endl;
 }; //default constructor
 
@@ -420,6 +448,7 @@ setY(Y);
 base = Base;
 height = Height;
 setColor(orange);
+setShapeType();
 cout << "TRIANGLE parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
@@ -429,6 +458,7 @@ setY(rhs.y);
 base = rhs.base;
 height = rhs.height;
 color = rhs.color;
+shapeType = rhs.shapeType;
 }; //copy constructor
 
 Triangle::~Triangle(){
@@ -460,6 +490,7 @@ cout << "Drawing TRIANGLE" << endl;
 
 Rectangle::Rectangle():base(0), height(0){
 setColor(indigo);
+setShapeType();
 cout << "RECTANGLE default constructor: count = " << count << endl;
 }; //default constructor
 
@@ -469,7 +500,7 @@ setY(Y);
 setColor(indigo);
 base = Base;
 height = Height;
-
+setShapeType();
 cout << "RECTANGLE parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
@@ -479,6 +510,7 @@ setY(rhs.y);
 base = rhs.base;
 height = rhs.height;
 color = rhs.color;
+shapeType = rhs.shapeType;
 }; //copy constructor
 
 Rectangle::~Rectangle(){
@@ -514,6 +546,7 @@ setY(0);
 setColor(blue);
 radius = 0.0;
 innerRadius = 0.0;
+setShapeType();
 cout << "DOUGHNUT default constructor: count = " << count << endl;
 }; //default constructor
 
@@ -523,6 +556,7 @@ setY(Y);
 setColor(blue);
 radius = Radius;
 innerRadius = IR;
+setShapeType();
 cout << "DOUGHNUT parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
@@ -532,6 +566,7 @@ setY(rhs.y);
 radius = rhs.radius;
 innerRadius = rhs.innerRadius;
 color = rhs.color;
+shapeType = rhs.shapeType;
 }; //copy constructor
 
 Doughnut::~Doughnut(){
