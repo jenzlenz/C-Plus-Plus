@@ -103,6 +103,7 @@ Circle(const Circle &rhs); //copy constructor
 
 //member functions
 float getRadius() const;
+void setRadius(float R);
 float calcArea();
 void drawObject();
 void setShapeType();
@@ -206,7 +207,7 @@ Shape::Shape():x(0), y(0), area(0.0), color(red){
 cout << "default SHAPE constructor: count = " << count << endl;
 }
 
-Shape::Shape(int X, int Y, float area, COLOR(green)):x(X), y(Y), area(getArea()){
+Shape::Shape(int X, int Y, float area, COLOR(red)):x(X), y(Y), area(getArea()){
 ++count;
 cout << "SHAPE Parameterized Constructor: count = " << count << endl;
 } 
@@ -302,6 +303,10 @@ return color;
 }
 
 Circle::Circle(){
+setX(0);
+setY(0);
+setRadius(0);
+setColor(violet);
 cout << "CIRCLE default constructor: count = " << count << endl;
 }; //default constructor
 
@@ -309,10 +314,13 @@ Circle::Circle(int X, int Y, float Radius){
 setX(X);
 setY(Y);
 radius = Radius;
+setColor(violet);
 cout << "CIRCLE parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
 Circle::Circle(const Circle &rhs){
+setX(rhs.x);
+setY(rhs.y);
 radius = rhs.radius;
 }; //copy constructor
 
@@ -322,6 +330,10 @@ cout << "CIRCLE destructor: count = " << count << endl;
 
 float Circle::getRadius() const{
 return radius;
+};
+
+void Circle::setRadius(float R) {
+radius = R;
 };
 
 void Circle::setShapeType(){
@@ -339,6 +351,9 @@ cout << "Drawing CIRCLE" << endl;
 }
 
 Triangle::Triangle():base(0), height(0){
+setX(x);
+setY(y);
+setColor(orange);
 cout << "TRIANGLE default constructor: count = " << count << endl;
 }; //default constructor
 
@@ -347,12 +362,16 @@ setX(X);
 setY(Y);
 base = Base;
 height = Height;
+setColor(orange);
 cout << "TRIANGLE parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
 Triangle::Triangle(const Triangle &rhs){
+setX(rhs.x);
+setY(rhs.y);
 base = rhs.base;
 height = rhs.height;
+color = rhs.color;
 }; //copy constructor
 
 Triangle::~Triangle(){
@@ -390,12 +409,16 @@ setX(X);
 setY(Y);
 base = Base;
 height = Height;
+
 cout << "RECTANGLE parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
 Rectangle::Rectangle(const Rectangle &rhs){
+setX(rhs.x);
+setY(rhs.y);
 base = rhs.base;
 height = rhs.height;
+color = rhs.color;
 }; //copy constructor
 
 Rectangle::~Rectangle(){
@@ -437,10 +460,11 @@ cout << "DOUGHNUT parameterized constructor: count = " << count << endl;
 }; //parameterized constructor
 
 Doughnut::Doughnut(const Doughnut &rhs){
-//x = rhs.X;
-//y = rhs.Y;
+setX(rhs.x);
+setY(rhs.y);
 radius = rhs.radius;
 innerRadius = rhs.innerRadius;
+color = rhs.color;
 }; //copy constructor
 
 Doughnut::~Doughnut(){
