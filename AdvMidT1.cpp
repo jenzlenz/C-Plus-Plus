@@ -42,11 +42,11 @@ void setX(int X);
 void setY(int Y);
 void setArea(float);
 void setColor(COLOR c);
-void setShapeType();
+virtual void setShapeType() = 0;//virtual
 
 //member functions
-float calcArea();//virtual
-void drawObject();//virtual
+virtual float calcArea() = 0;//virtual
+virtual void drawObject() = 0;//virtual
 void resetLocation(int deltaX, int deltaY);
 
 };
@@ -69,9 +69,9 @@ Triangle(const Triangle &rhs); //copy constructor
 //member functions
 float getBase() const;
 float getHeight() const;
-float calcArea();
-void drawObject();
-void setShapeType();
+virtual float calcArea();
+virtual void drawObject();
+virtual void setShapeType();
 };
 
 class Rectangle:public Shape
@@ -90,9 +90,9 @@ Rectangle(const Rectangle &rhs); //copy constructor
 //member functions
 float getBase() const;
 float getHeight() const;
-float calcArea();
-void drawObject();
-void setShapeType();
+virtual float calcArea();
+virtual void drawObject();
+virtual void setShapeType();
 };
 
 class Circle:public Shape
@@ -109,11 +109,11 @@ Circle(const Circle &rhs); //copy constructor
 
 //member functions
 float getRadius() const;
-void setShapeType();
+virtual void setShapeType();
 void setRadius(float R);
 void setArea(float);
-float calcArea();
-void drawObject();
+virtual float calcArea();
+virtual void drawObject();
 
 //overloaded scalar functions
 Circle operator*(int scalar); 
@@ -136,9 +136,9 @@ Doughnut(const Doughnut &rhs); //copy constructor
 //member functions
 float getRadius() const;
 float getInnerRadius() const;
-float calcArea();
-void drawObject();
-void setShapeType();
+virtual float calcArea();
+virtual void drawObject();
+virtual void setShapeType();
 };
 
 
@@ -146,7 +146,7 @@ void setShapeType();
 
 int main()
 {
-
+/* Commenting out all my testing
 //Testing Shape Base Class
 //Shape A;
 //A.setX(5);
@@ -209,6 +209,27 @@ cout << "The radius of Doughnut L is: " << L.getRadius() << endl;
 cout << "The inner radius of Doughnut L is: " << L.getInnerRadius() << endl;
 cout << "The area of Doughnut L is: " << L.calcArea() << endl;
 L.drawObject();
+Commenting out all my testing */
+
+Shape* shape_ptr[6];
+shape_ptr[0] = new Circle(30, 30, 5);
+shape_ptr[1] = new Circle(50, 50, 10);
+shape_ptr[2] = new Triangle(15, 20, 5, 10);
+shape_ptr[3] = new Rectangle(150, 150, 15, 10);
+shape_ptr[4] = new Rectangle(100, 100, 5, 15);
+shape_ptr[5] = new Doughnut(40, 70, 5, 15);
+
+for (int i=0; i<6; ++i){
+   cout << "X = " << shape_ptr[i]->getX() << endl;
+   cout << "Y = " << shape_ptr[i]->getY() << endl;
+   shape_ptr[i]->calcArea();
+   cout << "Area = " << shape_ptr[i]->getArea() << endl;
+   cout << "Color = " << shape_ptr[i]->getColor() << endl;
+   //shape_ptr[i]->getShapeType();
+};
+
+
+
 
 return 0;
 }
@@ -360,6 +381,7 @@ shapeType = "Circle";
 float Circle::calcArea(){
 //cout << "Calculating Area for CIRCLE" << endl;
 area = PI*radius*radius;
+setArea(area);
 return area;
 };
 
@@ -428,6 +450,7 @@ return height;
 float Triangle::calcArea(){
 //cout << "Calculating Area for TRIANGLE" << endl;
 area = (base*height)/2;
+setArea(area);
 return area;
 };
 
@@ -477,6 +500,7 @@ shapeType = "Rectangle";
 float Rectangle::calcArea(){
 //cout << "Calculating Area for RECTANGLE" << endl;
 area = base * height;
+setArea(area);
 return area;
 };
 
@@ -529,6 +553,7 @@ shapeType = "Doughnut";
 float Doughnut::calcArea(){
 //cout << "Calculating Area for DOUGHNUT" << endl;
 area = PI * (pow(radius, 2) - pow(innerRadius, 2));
+setArea(area);
 return area;
 };
 
