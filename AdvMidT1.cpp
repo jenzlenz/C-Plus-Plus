@@ -50,7 +50,7 @@ virtual float calcArea() = 0;//virtual
 virtual void drawObject() = 0;//virtual
 void resetLocation(int deltaX, int deltaY);
 //void SortShape(Shape* S_ptr[], int n); not compiling
-
+float getDistance(Shape &rhs);
 };
 
 int Shape::count = 0; // initialization of static int count variable must be outside of class
@@ -148,71 +148,6 @@ virtual void setShapeType();
 
 int main()
 {
-/* Commenting out all my testing
-//Testing Shape Base Class
-//Shape A;
-//A.setX(5);
-//A.setY(10);
-//cout << " The X of object A is equal to : " << A.getX() << endl;
-//cout << " The Y of object A is equal to : " << A.getY() << endl;
-//Shape B = A;
-//cout << "The area of object A is: " << A.calcArea() << endl;
-//A.drawObject();
-//A.resetLocation(8,8);
-//cout << " The X of object A after resetLocation is equal to : " << A.getX() << endl;
-//cout << " The Y of object A after resetLocation is equal to : " << A.getY() << endl;
-//cout << "The area of object A is: " << A.getArea() << endl;
-//cout << "The color of object A is: " << A.getColor() << endl;
-
-//Testing Circle Class
-//Circle C;
-//Circle D = C;
-Circle E(30, 30, 5);
-Circle F(50, 50, 10);
-//cout << endl << "The radius of Circle C is: " << C.getRadius() << endl;
-//cout << "The area of Circle C is: " << C.calcArea() << endl;
-//cout << "The radius of Circle D is: " << D.getRadius() << endl;
-//cout << "The area of Circle D is: " << D.calcArea() << endl;
-cout << "The radius of Circle E is: " << E.getRadius() << endl;
-cout << "The area of Circle E is: " << E.calcArea() << endl;
-cout << "The radius of Circle F is: " << F.getRadius() << endl;
-cout << "The area of Circle F is: " << F.calcArea() << endl;
-E.drawObject();
-
-//Testing Triangle Class
-//Triangle T;
-//Triangle U = T;
-Triangle V(15, 20, 5, 10);
-//cout << endl << "The area of Triangle T is: " << T.calcArea() << endl;
-//cout << "The area of Triangle U is: " << U.calcArea() << endl;
-cout << "The area of Triangle V is: " << V.calcArea() << endl;
-V.drawObject();
-
-//Testing Rectangle Class
-//Rectangle R;
-//Rectangle S = R;
-Rectangle P(150, 150, 15, 10);
-Rectangle Q(100, 100, 5, 15);
-//cout << "The area of Rectangle R is: " << R.calcArea() << endl;
-//cout << "The area of Rectangle S is: " << S.calcArea() << endl;
-cout << "The area of Rectangle P is: " << P.calcArea() << endl;
-cout << "The area of Rectangle Q is: " << Q.calcArea() << endl;
-P.drawObject();
-
-//Testing Doughnut Class
-//Doughnut J;
-//Doughnut K = J;
-Doughnut L(40, 70, 5, 10);
-//cout << "The radius of Doughnut J is: " << J.getInnerRadius() << endl;
-//cout << "The area of Doughnut J is: " << J.calcArea() << endl;
-//cout << "The radius of Doughnut K is: " << K.getInnerRadius() << endl;
-//cout << "The area of Doughnut K is: " << K.calcArea() << endl;
-cout << "The radius of Doughnut L is: " << L.getRadius() << endl;
-cout << "The inner radius of Doughnut L is: " << L.getInnerRadius() << endl;
-cout << "The area of Doughnut L is: " << L.calcArea() << endl;
-L.drawObject();
-Commenting out all my testing */
-
 Shape* shape_ptr[6];
 shape_ptr[0] = new Circle(30, 30, 5);
 shape_ptr[1] = new Circle(50, 50, 10);
@@ -228,19 +163,17 @@ for (int i=0; i<6; ++i){
    shape_ptr[i]->calcArea();
    cout << "Area = " << shape_ptr[i]->getArea() << " ";
    cout << "Color = " << shape_ptr[i]->getColor() << endl;
-   
-   
+};
+      
 //SortShape(*shape_ptr[], 6); not compiling
 
-};
-
-
-
+Circle C1(0, 0, 10);
+Circle C2(3, 4, 15);
+cout << "The distance between C1 and C2 is: " << C1.getDistance(C2) << endl;
 
 return 0;
 }
 
-//Shape::Shape():x(0), y(0), area(0.0), shapeType(NULL){
 Shape::Shape():x(0), y(0), area(0.0), color(red){
 ++count;
 cout << "default SHAPE constructor: count = " << count << endl;
@@ -264,6 +197,19 @@ color = rhs.color;
 ++count;
 cout << "SHAPE copy constructor: count = " << count << endl;
 }
+
+float Shape::getDistance(Shape &rhs){
+   float distance = 0;
+   int difXcoord = 0;
+   int difYcoord = 0;
+   
+   difXcoord = this->x - rhs.x;
+   difYcoord = this->y - rhs.y;
+
+   distance = pow(difXcoord, 2) + pow(difYcoord,2);
+   distance = sqrt(distance);
+return distance;
+};
 
 int Shape::getX() const{
 //cout << "SHAPE getX" << endl;
