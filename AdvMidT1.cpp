@@ -9,6 +9,7 @@ Synopsis:  Create a program that contains abase class Shape and subclasses and w
 #include <cstdlib>
 #include <cmath>
 using namespace std;
+#define PI 3.14159
 
 enum COLOR {red, orange, yellow, green, blue, indigo, violet};
 
@@ -20,7 +21,7 @@ int x;
 int y;
 float area;
 COLOR color;
-//string shapeType;
+string shapeType;
 static int count;
 
 public:
@@ -29,14 +30,13 @@ Shape();//default constructor
 Shape(int X, int Y, float Area, COLOR color);//parameterized constructor
 ~Shape();//destructor
 Shape(const Shape &rhs);//copy constructor
-//overloaded functions
-//assignment operator
 
 //member functions
-int getX();
-int getY();
+int getX() const;
+int getY() const;
 void setX(int X);
 void setY(int Y);
+void setColor(COLOR c);
 float calcArea();//virtual
 void drawObject();//virtual
 void resetLocation(int deltaX, int deltaY);
@@ -55,10 +55,13 @@ int height;
 public:
 //constructors
 Triangle(); //default constructor
+Triangle(int X, int Y, int Base, int Height); //parameterized constructor
 Triangle(const Triangle &rhs); //copy constructor
 ~Triangle(); //destructor
 
 //member functions
+float getBase() const;
+float getHeight() const;
 float calcArea();
 void drawObject();
 };
@@ -72,22 +75,26 @@ int height;
 public:
 //constructors
 Rectangle(); //default constructor
+Rectangle(int X, int Y, int Base, int Height); //parameterized constructor
 Rectangle(const Rectangle &rhs); //copy constructor
 ~Rectangle(); //destructor
 
 //member functions
+float getBase() const;
+float getHeight() const;
 float calcArea();
 void drawObject();
 };
 
 class Circle:public Shape
 {
-private:
+protected:
 float radius;
 
 public:
 //constructors
 Circle(); //default constructor
+Circle(int X, int Y, float Radius); //parameterized constructor
 Circle(const Circle &rhs); //copy constructor
 ~Circle(); //destructor
 
@@ -100,15 +107,17 @@ void drawObject();
 class Doughnut:public Circle
 {
 private:
-float radius;
+float innerRadius;
 
 public:
 //constructors
 Doughnut(); //default constructor
+Doughnut(int x, int y, float Radius, float InnerRadius); //parameterized constructor
 Doughnut(const Doughnut &rhs); //copy constructor
 ~Doughnut(); //destructor
 
 //member functions
+float getInnerRadius() const;
 float calcArea();
 void drawObject();
 };
@@ -136,22 +145,37 @@ int main()
 
 //Testing Circle Class
 Circle C;
+Circle D = C;
 cout << "The radius of Circle C is: " << C.getRadius() << endl;
 cout << "The area of Circle C is: " << C.calcArea() << endl;
+cout << "The radius of Circle D is: " << D.getRadius() << endl;
+cout << "The area of Circle D is: " << D.calcArea() << endl;
 C.drawObject();
-Circle D = C;
+
 
 //Testing Triangle Class
 Triangle T;
-cout << "The area of Triangle T is: " << T.calcArea() << endl;
-T.drawObject();
 Triangle U = T;
+cout << "The area of Triangle T is: " << T.calcArea() << endl;
+cout << "The area of Triangle U is: " << U.calcArea() << endl;
+T.drawObject();
+
 
 //Testing Rectangle Class
 Rectangle R;
-cout << "The area of Rectangke R is: " << R.calcArea() << endl;
-R.drawObject();
 Rectangle S = R;
+cout << "The area of Rectangle R is: " << R.calcArea() << endl;
+cout << "The area of Rectangle S is: " << S.calcArea() << endl;
+R.drawObject();
+
+//Testing Doughnut Class
+Doughnut J;
+Doughnut K = J;
+cout << "The radius of Doughnut J is: " << J.getRadius() << endl;
+cout << "The area of Doughnut J is: " << J.calcArea() << endl;
+cout << "The radius of Doughnut K is: " << K.getRadius() << endl;
+cout << "The area of Doughnut is: " << K.calcArea() << endl;
+J.drawObject();
 
 return 0;
 }
@@ -163,9 +187,6 @@ cout << "default SHAPE constructor: count = " << count << endl;
 }
 
 Shape::Shape(int X, int Y, float area, COLOR(green)):x(X), y(Y), area(getArea()){
-//int len = strlen(shapeTYPE);
-//shapeType = new char[len+1];
-//strcpy(shapeType, shapeTYPE);
 ++count;
 cout << "SHAPE Parameterized Constructor: count = " << count << endl;
 } 
@@ -184,12 +205,12 @@ color = rhs.color;
 cout << "SHAPE copy constructor: count = " << count << endl;
 }
 
-int Shape::getX(){
+int Shape::getX() const{
 //cout << "SHAPE getX" << endl;
 return x;
 }
 
-int Shape::getY(){
+int Shape::getY() const{
 //cout << "SHAPE getY" << endl;
 return y;
 }
@@ -204,9 +225,36 @@ y = Y;
 //cout << "SHAPE set Y" << endl;
 }
 
+void Shape::setColor(COLOR c){
+cout << "SHAPE set color" << endl;
+switch(c){
+ case red:{ 
+      color = red;
+      break;}
+ case orange:{ 
+      color = orange;
+      break;}
+ case yellow:{ 
+      color = yellow;
+      break;}
+ case green:{ 
+      color = green;
+      break;}
+ case blue:{ 
+      color = blue;
+      break;}
+ case indigo:{ 
+      color = indigo;
+      break;}
+ case violet:{ 
+      color = violet;
+      break;}
+}
+};
+
 float Shape::calcArea(){
 //cout << "Calculating Area for SHAPE" << endl;
-return 88.88;
+return 0.0;
 }
 
 void Shape::drawObject(){
@@ -233,9 +281,14 @@ Circle::Circle(){
 cout << "CIRCLE default constructor: count = " << count << endl;
 }; //default constructor
 
+Circle::Circle(int X, int Y, float Radius){
+setX(X);
+setY(Y);
+radius = Radius;
+cout << "CIRCLE parameterized constructor: count = " << count << endl;
+}; //parameterized constructor
+
 Circle::Circle(const Circle &rhs){
-//x = rhs.X;
-//y = rhs.Y;
 radius = rhs.radius;
 }; //copy constructor
 
@@ -245,62 +298,131 @@ cout << "CIRCLE destructor: count = " << count << endl;
 
 //member functions
 float Circle::getRadius(){
-return (radius = 5.5);
+return radius;
 };
 
 float Circle::calcArea(){
 //cout << "Calculating Area for CIRCLE" << endl;
-return 99.99;
+area = PI*radius*radius;
+return area;
 };
 
 void Circle::drawObject(){
 cout << "Drawing CIRCLE" << endl;
 }
 
-Triangle::Triangle(){
+Triangle::Triangle():base(0), height(0){
 cout << "TRIANGLE default constructor: count = " << count << endl;
 }; //default constructor
 
+Triangle::Triangle(int X, int Y, int Base, int Height){
+setX(X);
+setY(Y);
+base = Base;
+height = Height;
+cout << "TRIANGLE parameterized constructor: count = " << count << endl;
+}; //parameterized constructor
+
 Triangle::Triangle(const Triangle &rhs){
-//x = rhs.X;
-//y = rhs.Y;
-//radius = rhs.radius;
+base = rhs.base;
+height = rhs.height;
 }; //copy constructor
 
 Triangle::~Triangle(){
 cout << "TRIANGLE destructor: count = " << count << endl;
 }; //destructor
 
+float Triangle::getBase() const{
+return base;
+};
+
+float Triangle::getHeight() const{
+return height;
+};
+
 float Triangle::calcArea(){
 //cout << "Calculating Area for TRIANGLE" << endl;
-return 33.33;
+area = (base*height)/2;
+return area;
 };
 
 void Triangle::drawObject(){
 cout << "Drawing TRIANGLE" << endl;
 }
 
-Rectangle::Rectangle(){
+Rectangle::Rectangle():base(0), height(0){
 cout << "RECTANGLE default constructor: count = " << count << endl;
 }; //default constructor
 
+Rectangle::Rectangle(int X, int Y, int Base, int Height){
+setX(X);
+setY(Y);
+base = Base;
+height = Height;
+cout << "RECTANGLE parameterized constructor: count = " << count << endl;
+}; //parameterized constructor
+
 Rectangle::Rectangle(const Rectangle &rhs){
-//x = rhs.X;
-//y = rhs.Y;
-//radius = rhs.radius;
+base = rhs.base;
+height = rhs.height;
 }; //copy constructor
 
 Rectangle::~Rectangle(){
 cout << "RECTANGLE destructor: count = " << count << endl;
 }; //destructor
 
+float Rectangle::getBase() const{
+return base;
+};
+
+float Rectangle::getHeight() const{
+return height;
+};
+
 float Rectangle::calcArea(){
 //cout << "Calculating Area for RECTANGLE" << endl;
-return 44.44;
+area = base * height;
+return area;
 };
 
 void Rectangle::drawObject(){
 cout << "Drawing RECTANGLE" << endl;
 }
 
+Doughnut::Doughnut(){
+cout << "DOUGHNUT default constructor: count = " << count << endl;
+}; //default constructor
+
+Doughnut::Doughnut(int X, int Y, float Radius, float IR){
+setX(X);
+setY(Y);
+radius = Radius;
+innerRadius = IR;
+cout << "DOUGHNUT parameterized constructor: count = " << count << endl;
+}; //parameterized constructor
+
+Doughnut::Doughnut(const Doughnut &rhs){
+//x = rhs.X;
+//y = rhs.Y;
+radius = rhs.radius;
+innerRadius = rhs.innerRadius;
+}; //copy constructor
+
+Doughnut::~Doughnut(){
+cout << "DOUGHNUT destructor: count = " << count << endl;
+}; //destructor
+
+float Doughnut::getInnerRadius() const{
+return innerRadius;
+};
+
+float Doughnut::calcArea(){
+//cout << "Calculating Area for DOUGHNUT" << endl;
+area = PI * (pow(radius, 2) - pow(innerRadius, 2));
+return area;
+};
+
+void Doughnut::drawObject(){
+cout << "Drawing DOUGHNUT" << endl;
+}
 
