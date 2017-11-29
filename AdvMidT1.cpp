@@ -37,6 +37,7 @@ int getY() const;
 void setX(int X);
 void setY(int Y);
 void setColor(COLOR c);
+void setShapeType();
 float calcArea();//virtual
 void drawObject();//virtual
 void resetLocation(int deltaX, int deltaY);
@@ -64,6 +65,7 @@ float getBase() const;
 float getHeight() const;
 float calcArea();
 void drawObject();
+void setShapeType();
 };
 
 class Rectangle:public Shape
@@ -84,6 +86,7 @@ float getBase() const;
 float getHeight() const;
 float calcArea();
 void drawObject();
+void setShapeType();
 };
 
 class Circle:public Shape
@@ -99,9 +102,10 @@ Circle(const Circle &rhs); //copy constructor
 ~Circle(); //destructor
 
 //member functions
-float getRadius();
+float getRadius() const;
 float calcArea();
 void drawObject();
+void setShapeType();
 };
 
 class Doughnut:public Circle
@@ -117,9 +121,11 @@ Doughnut(const Doughnut &rhs); //copy constructor
 ~Doughnut(); //destructor
 
 //member functions
+float getRadius() const;
 float getInnerRadius() const;
 float calcArea();
 void drawObject();
+void setShapeType();
 };
 
 
@@ -144,38 +150,52 @@ int main()
 //cout << "The color of object A is: " << A.getColor() << endl;
 
 //Testing Circle Class
-Circle C;
-Circle D = C;
-cout << "The radius of Circle C is: " << C.getRadius() << endl;
-cout << "The area of Circle C is: " << C.calcArea() << endl;
-cout << "The radius of Circle D is: " << D.getRadius() << endl;
-cout << "The area of Circle D is: " << D.calcArea() << endl;
-C.drawObject();
-
+//Circle C;
+//Circle D = C;
+Circle E(30, 30, 5);
+Circle F(50, 50, 10);
+//cout << endl << "The radius of Circle C is: " << C.getRadius() << endl;
+//cout << "The area of Circle C is: " << C.calcArea() << endl;
+//cout << "The radius of Circle D is: " << D.getRadius() << endl;
+//cout << "The area of Circle D is: " << D.calcArea() << endl;
+cout << "The radius of Circle E is: " << E.getRadius() << endl;
+cout << "The area of Circle E is: " << E.calcArea() << endl;
+cout << "The radius of Circle F is: " << F.getRadius() << endl;
+cout << "The area of Circle F is: " << F.calcArea() << endl;
+E.drawObject();
 
 //Testing Triangle Class
-Triangle T;
-Triangle U = T;
-cout << "The area of Triangle T is: " << T.calcArea() << endl;
-cout << "The area of Triangle U is: " << U.calcArea() << endl;
-T.drawObject();
-
+//Triangle T;
+//Triangle U = T;
+Triangle V(15, 20, 5, 10);
+//cout << endl << "The area of Triangle T is: " << T.calcArea() << endl;
+//cout << "The area of Triangle U is: " << U.calcArea() << endl;
+cout << "The area of Triangle V is: " << V.calcArea() << endl;
+V.drawObject();
 
 //Testing Rectangle Class
-Rectangle R;
-Rectangle S = R;
-cout << "The area of Rectangle R is: " << R.calcArea() << endl;
-cout << "The area of Rectangle S is: " << S.calcArea() << endl;
-R.drawObject();
+//Rectangle R;
+//Rectangle S = R;
+Rectangle P(150, 150, 15, 10);
+Rectangle Q(100, 100, 5, 15);
+//cout << "The area of Rectangle R is: " << R.calcArea() << endl;
+//cout << "The area of Rectangle S is: " << S.calcArea() << endl;
+cout << "The area of Rectangle P is: " << P.calcArea() << endl;
+cout << "The area of Rectangle Q is: " << Q.calcArea() << endl;
+P.drawObject();
 
 //Testing Doughnut Class
-Doughnut J;
-Doughnut K = J;
-cout << "The radius of Doughnut J is: " << J.getRadius() << endl;
-cout << "The area of Doughnut J is: " << J.calcArea() << endl;
-cout << "The radius of Doughnut K is: " << K.getRadius() << endl;
-cout << "The area of Doughnut is: " << K.calcArea() << endl;
-J.drawObject();
+//Doughnut J;
+//Doughnut K = J;
+Doughnut L(40, 70, 5, 10);
+//cout << "The radius of Doughnut J is: " << J.getInnerRadius() << endl;
+//cout << "The area of Doughnut J is: " << J.calcArea() << endl;
+//cout << "The radius of Doughnut K is: " << K.getInnerRadius() << endl;
+//cout << "The area of Doughnut K is: " << K.calcArea() << endl;
+cout << "The radius of Doughnut L is: " << L.getRadius() << endl;
+cout << "The inner radius of Doughnut L is: " << L.getInnerRadius() << endl;
+cout << "The area of Doughnut L is: " << L.calcArea() << endl;
+L.drawObject();
 
 return 0;
 }
@@ -224,6 +244,10 @@ void Shape::setY(int Y){
 y = Y;
 //cout << "SHAPE set Y" << endl;
 }
+
+void Shape::setShapeType(){
+shapeType = " ";
+};
 
 void Shape::setColor(COLOR c){
 cout << "SHAPE set color" << endl;
@@ -296,9 +320,12 @@ Circle::~Circle(){
 cout << "CIRCLE destructor: count = " << count << endl;
 }; //destructor
 
-//member functions
-float Circle::getRadius(){
+float Circle::getRadius() const{
 return radius;
+};
+
+void Circle::setShapeType(){
+shapeType = "Circle";
 };
 
 float Circle::calcArea(){
@@ -334,6 +361,10 @@ cout << "TRIANGLE destructor: count = " << count << endl;
 
 float Triangle::getBase() const{
 return base;
+};
+
+void Triangle::setShapeType(){
+shapeType = "Triangle";
 };
 
 float Triangle::getHeight() const{
@@ -379,6 +410,10 @@ float Rectangle::getHeight() const{
 return height;
 };
 
+void Rectangle::setShapeType(){
+shapeType = "Rectangle";
+};
+
 float Rectangle::calcArea(){
 //cout << "Calculating Area for RECTANGLE" << endl;
 area = base * height;
@@ -412,8 +447,16 @@ Doughnut::~Doughnut(){
 cout << "DOUGHNUT destructor: count = " << count << endl;
 }; //destructor
 
+float Doughnut::getRadius() const{
+Circle::getRadius();
+};
+
 float Doughnut::getInnerRadius() const{
 return innerRadius;
+};
+
+void Doughnut::setShapeType(){
+shapeType = "Doughnut";
 };
 
 float Doughnut::calcArea(){
