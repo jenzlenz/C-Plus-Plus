@@ -31,18 +31,24 @@ Shape(int X, int Y, float Area, COLOR color);//parameterized constructor
 ~Shape();//destructor
 Shape(const Shape &rhs);//copy constructor
 
-//member functions
+//accessors
 int getX() const;
 int getY() const;
+float getArea() const;
+COLOR getColor() const;
+
+//mutators
 void setX(int X);
 void setY(int Y);
+void setArea(float);
 void setColor(COLOR c);
 void setShapeType();
+
+//member functions
 float calcArea();//virtual
 void drawObject();//virtual
 void resetLocation(int deltaX, int deltaY);
-float getArea() const;
-COLOR getColor() const;
+
 };
 
 int Shape::count = 0; // initialization of static int count variable must be outside of class
@@ -103,10 +109,16 @@ Circle(const Circle &rhs); //copy constructor
 
 //member functions
 float getRadius() const;
+void setShapeType();
 void setRadius(float R);
+void setArea(float);
 float calcArea();
 void drawObject();
-void setShapeType();
+
+//overloaded scalar functions
+Circle operator*(int scalar); 
+friend Circle operator*(int scale, Circle &rhs);
+
 };
 
 class Doughnut:public Circle
@@ -277,6 +289,10 @@ switch(c){
 }
 };
 
+void Shape::setArea(float A){
+area = A;
+};
+
 float Shape::calcArea(){
 //cout << "Calculating Area for SHAPE" << endl;
 return 0.0;
@@ -322,6 +338,7 @@ Circle::Circle(const Circle &rhs){
 setX(rhs.x);
 setY(rhs.y);
 radius = rhs.radius;
+setColor(rhs.color);
 }; //copy constructor
 
 Circle::~Circle(){
@@ -346,9 +363,27 @@ area = PI*radius*radius;
 return area;
 };
 
+void Circle::setArea(float A){
+area = A;
+};
+
 void Circle::drawObject(){
 cout << "Drawing CIRCLE" << endl;
 }
+
+Circle Circle::operator*(int scalar){
+   cout << "Entering the scalar overloaded operator X*10" << endl;
+   setX(getX() * scalar);
+   setY(getY() * scalar);
+   radius = radius * scalar;
+   setArea(calcArea());
+return *this;
+}; 
+
+Circle operator*(int scale, Circle &rhs){
+   cout << "Entering the scalar overloaded operator 10*X" << endl;
+return Circle(scale * rhs.getX(), scale * rhs.getY(), scale * rhs.getRadius());
+};
 
 Triangle::Triangle():base(0), height(0){
 setX(x);
@@ -401,12 +436,14 @@ cout << "Drawing TRIANGLE" << endl;
 }
 
 Rectangle::Rectangle():base(0), height(0){
+setColor(indigo);
 cout << "RECTANGLE default constructor: count = " << count << endl;
 }; //default constructor
 
 Rectangle::Rectangle(int X, int Y, int Base, int Height){
 setX(X);
 setY(Y);
+setColor(indigo);
 base = Base;
 height = Height;
 
@@ -448,12 +485,18 @@ cout << "Drawing RECTANGLE" << endl;
 }
 
 Doughnut::Doughnut(){
+setX(0);
+setY(0);
+setColor(blue);
+radius = 0.0;
+innerRadius = 0.0;
 cout << "DOUGHNUT default constructor: count = " << count << endl;
 }; //default constructor
 
 Doughnut::Doughnut(int X, int Y, float Radius, float IR){
 setX(X);
 setY(Y);
+setColor(blue);
 radius = Radius;
 innerRadius = IR;
 cout << "DOUGHNUT parameterized constructor: count = " << count << endl;
