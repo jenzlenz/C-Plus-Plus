@@ -7,31 +7,38 @@ X and Y can be either an int, float, long, double, etc  N MUST always be an int.
 */
 
 #include <iostream>
-#include <cmath>
 using namespace std;
 
-void xToThePower(int x, int n);
+template <class T>
+inline T xToThePower(T x, int n){
+ if (isalpha(x)) {
+    cout << "Cannot use the power function on chars." << endl;
+  } else {
+          T result = 0;
+          for (int i = 1; i < n+1; ++i){
+              if (i == 1){
+                 result = x;
+              } else { 
+                     result = result * x;
+                }
+          }
+          cout << result << endl;
+  }
+};
 
 int main() 
 {
+int x = 2;
+double y = 3.5;
+float z = 5.55555;
+long w = 9.12345678987654321;
+char c = 'c';
 
-xToThePower(3, 2);
-xToThePower(3, 3);
-xToThePower(3, 4);
-xToThePower(3, 5);
+xToThePower(x, 2);
+xToThePower(y, 3);
+xToThePower(z, 4);
+xToThePower(w, 4);
+xToThePower(c, 5);
 
 return 0; 
-}
-
-void xToThePower(int x, int n){
-  int result = 0;
-  for (int i = 1; i < n+1; ++i){
-       if (i == 1){
-         result = x;
-       }  
-       else { 
-         result = result * x;
-       }
-   }
-   cout << result << endl;
 }
