@@ -1,3 +1,15 @@
+/*
+Program Name: Advf3.cpp
+Author: Jennifer Dooley
+Date: Dec 19, 2017
+Synopsis: 
+Write a program to multiply two vector integer matrices.
+Output the results onto a third vector matrix.  
+Allow the user to input the dimensions of the two matrices.
+Evaluate if matrix multiplication is possible on the dimensions entered.
+Output an error message if the dimensions are incompatible and can not be multiplied.
+*/
+
 #include <iostream>
 #include <vector>
 
